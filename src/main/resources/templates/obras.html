@@ -1,0 +1,22 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{_fragments::head}"></head>
+    <body>
+        <nav  th:replace="~{_fragments::nav}"></nav>
+        <div class="container-fluid">
+            <h1>Obras do Zé</h1>
+            <table id="obras" class="table datatable table-sm table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="obra:${obras}">
+                        <td th:text="${obra.titulo}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
