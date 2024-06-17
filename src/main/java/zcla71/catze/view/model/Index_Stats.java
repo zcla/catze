@@ -8,4 +8,5 @@ import lombok.Data;
 public class Index_Stats {
     private Integer obras;
     private Integer livros;
+    private Integer pessoas;
 }

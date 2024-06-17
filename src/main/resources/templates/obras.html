@@ -4,16 +4,21 @@
     <body>
         <nav  th:replace="~{_fragments::nav}"></nav>
         <div class="container-fluid">
-            <h1>Obras do Zé</h1>
+            <h1>Obras</h1>
             <table id="obras" class="table datatable table-sm table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Título</th>
+                        <th>Autor(es)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="obra:${obras}">
                         <td th:text="${obra.titulo}"></td>
+                        <td>
+                            <span th:text="${obra.autorPrincipal}"></span>
+                            <span class="badge text-bg-primary float-end" th:text="${obra.qtdOutrosAutores}" th:title="${obra.outrosAutores}"></span>
+                        </td>
                     </tr>
                 </tbody>
             </table>

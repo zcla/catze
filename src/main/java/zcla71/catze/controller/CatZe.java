@@ -31,7 +31,7 @@ public class CatZe {
 
     public Index_Stats getIndex() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
-        Index_Stats result = new Index_Stats(service.getObras().size(), service.getLivros().size());
+        Index_Stats result = new Index_Stats(service.getObras().size(), service.getLivros().size(), service.getPessoas().size());
         return result;
     }
 

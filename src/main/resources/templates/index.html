@@ -5,21 +5,35 @@
         <nav  th:replace="~{_fragments::nav}"></nav>
         <div class="container-fluid">
             <h1>Catálogo do Zé</h1>
-            <div class="card-group">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="text-center">Obras</h5>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-text text-center" th:text="${stats.getObras()}"></h1>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Obras</h5>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-text text-center" th:text="${stats.getObras()}"></h1>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="text-center">Livros</h5>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Livros</h5>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-text text-center" th:text="${stats.getLivros()}"></h1>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h1 class="card-text text-center" th:text="${stats.getLivros()}"></h1>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Pessoas</h5>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-text text-center" th:text="${stats.getPessoas()}"></h1>
+                        </div>
                     </div>
                 </div>
             </div>

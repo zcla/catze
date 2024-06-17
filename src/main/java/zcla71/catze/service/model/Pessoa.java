@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class Pessoa {
-    // private String id;
-    // private String nome;
+    private String id;
+    private String nome;
 }

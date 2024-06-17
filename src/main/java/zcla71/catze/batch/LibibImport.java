@@ -13,17 +13,20 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 import zcla71.catze.batch.model.LibibCsvLine;
 import zcla71.catze.repository.Repository;
+import zcla71.catze.repository.model.CatZeRepositoryData;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.ObraLiteraria;
+import zcla71.catze.service.model.Pessoa;
 import zcla71.util.Utils;
 
 public class LibibImport {
+    private static final String JSON_FILE_LOCATION = "data/catze.json"; // TODO Jogar pro application.properties
+
     public static void main(String[] args) throws URISyntaxException, IOException {
         List<LibibCsvLine> libib = readLibib();
-        Repository repository = zcla71.catze.repository.Repository.getInstance();
+        Repository<CatZeRepositoryData> repository = new Repository<CatZeRepositoryData>(CatZeRepositoryData.class, JSON_FILE_LOCATION, false);
 
         repository.beginTransaction();
-        repository.clear();
         try {
             for (LibibCsvLine line : libib) {
                 switch (line.getItemType()) {
@@ -31,14 +34,26 @@ public class LibibImport {
                         ObraLiteraria obra = new ObraLiteraria();
                         obra.setId(Utils.generateId());
                         obra.setTitulo(line.getTitle());
-                        repository.getObras().add(obra);
+                        String[] autores = line.getCreators().split(",");
+                        obra.setIdsAutores(new ArrayList<>());
+                        for (String autor : autores) {
+                            Pessoa pessoa = repository.getData().getPessoas().stream().filter(p -> p.getNome().equals(autor)).findFirst().orElse(null);
+                            if (pessoa == null) {
+                                pessoa = new Pessoa();
+                                pessoa.setId(Utils.generateId());
+                                pessoa.setNome(autor);
+                                repository.getData().getPessoas().add(pessoa);
+                            }
+                            obra.getIdsAutores().add(pessoa.getId());
+                        }
+                        repository.getData().getObras().add(obra);
 
                         Livro livro = new Livro();
                         livro.setId(Utils.generateId());
                         livro.setTitulo(line.getTitle());
                         livro.setIdsObras(new ArrayList<>());
                         livro.getIdsObras().add(obra.getId());
-                        repository.getLivros().add(livro);
+                        repository.getData().getLivros().add(livro);
                         break;
 
                     default:
