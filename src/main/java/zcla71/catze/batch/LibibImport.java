@@ -53,7 +53,12 @@ public class LibibImport {
                         livro.setTitulo(line.getTitle());
                         livro.setIdsObras(new ArrayList<>());
                         livro.getIdsObras().add(obra.getId());
-                        livro.setIsbn13(line.getEanIsbn13());
+                        if ((line.getEanIsbn13() != null) && (line.getEanIsbn13().length() > 0)) {
+                            livro.setIsbn13(line.getEanIsbn13());
+                        }
+                        if ((line.getUpcIsbn10() != null) && (line.getUpcIsbn10().length() > 0)) {
+                            livro.setIsbn10(line.getUpcIsbn10());
+                        }
                         repository.getData().getLivros().add(livro);
                         break;
 
