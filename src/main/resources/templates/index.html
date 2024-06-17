@@ -12,7 +12,7 @@
                             <h5 class="text-center">Obras</h5>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-text text-center" th:text="${stats.getObras()}"></h1>
+                            <h1 class="card-text text-center" th:text="${stats.obras}"></h1>
                         </div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                             <h5 class="text-center">Livros</h5>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-text text-center" th:text="${stats.getLivros()}"></h1>
+                            <h1 class="card-text text-center" th:text="${stats.livros}"></h1>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,17 @@
                             <h5 class="text-center">Pessoas</h5>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-text text-center" th:text="${stats.getPessoas()}"></h1>
+                            <h1 class="card-text text-center" th:text="${stats.pessoas}"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Editoras</h5>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-text text-center" th:text="${stats.editoras}"></h1>
                         </div>
                     </div>
                 </div>

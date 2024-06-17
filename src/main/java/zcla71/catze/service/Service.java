@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DatabindException;
 
 import zcla71.catze.repository.Repository;
 import zcla71.catze.repository.model.CatZeRepositoryData;
+import zcla71.catze.service.model.Editora;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.Obra;
 import zcla71.catze.service.model.Pessoa;
@@ -29,10 +30,19 @@ public class Service {
         this.repository = new Repository<CatZeRepositoryData>(CatZeRepositoryData.class, JSON_FILE_LOCATION, true);
     }
 
+    // Editoras
+
+    public Collection<Editora> getEditoras() throws StreamReadException, DatabindException, IOException {
+        return this.repository.getData().getEditoras();
+    }
+
+    // Livros
 
     public Collection<Livro> getLivros() throws StreamReadException, DatabindException, IOException {
         return this.repository.getData().getLivros();
     }
+
+    // Obras
 
     public Collection<Obra> getObras() throws StreamReadException, DatabindException, IOException {
         return this.repository.getData().getObras();
@@ -41,6 +51,8 @@ public class Service {
     public Obra getObraById(String id) {
         return this.repository.getData().getObraById(id);
     }
+
+    // Pessoas
 
     public Collection<Pessoa> getPessoas() throws StreamReadException, DatabindException, IOException {
         return this.repository.getData().getPessoas();
