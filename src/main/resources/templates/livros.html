@@ -10,6 +10,7 @@
                     <tr>
                         <th>Título</th>
                         <th>Autor(es)</th>
+                        <th>ISBN</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,6 +20,7 @@
                             <span th:text="${livro.autorPrincipal}"></span>
                             <span class="badge text-bg-primary float-end" th:text="${livro.qtdOutrosAutores}" th:title="${livro.outrosAutores}"></span>
                         </td>
+                        <td th:text="${livro.isbn13}"></td>
                     </tr>
                 </tbody>
             </table>

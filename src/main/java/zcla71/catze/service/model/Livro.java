@@ -9,4 +9,5 @@ public class Livro {
     private String id;
     private String titulo;
     private Collection<String> idsObras;
+    private String isbn13;
 }

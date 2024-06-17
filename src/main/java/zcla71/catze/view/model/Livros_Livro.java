@@ -17,11 +17,13 @@ public class Livros_Livro {
     private String autorPrincipal;
     private String qtdOutrosAutores;
     private String outrosAutores;
+    private String isbn13;
 
     public Livros_Livro(Livro livro) throws StreamReadException, DatabindException, IOException {
         this.titulo = livro.getTitulo();
         this.qtdOutrosAutores = null;
         this.outrosAutores = null;
+        this.isbn13 = livro.getIsbn13();
 
         Integer qtdOutrosAutores = 0;
         for (String idObra : livro.getIdsObras()) {
