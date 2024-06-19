@@ -19,7 +19,10 @@
 
 	"customizations": {
 		"vscode": {
-	      	"extensions": ["mechatroner.rainbow-csv"]
+	      	"extensions": [
+				"mechatroner.rainbow-csv",
+				"redhat.fabric8-analytics"
+			]
     	}
 	}
 
