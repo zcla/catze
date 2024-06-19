@@ -25,7 +25,7 @@ public class LibibImport {
 
     public static void main(String[] args) throws URISyntaxException, IOException {
         List<LibibCsvLine> libib = readLibib();
-        Repository<CatZeRepositoryData> repository = new Repository<CatZeRepositoryData>(CatZeRepositoryData.class, JSON_FILE_LOCATION, false);
+        Repository<CatZeRepositoryData> repository = new Repository<CatZeRepositoryData>(CatZeRepositoryData.class, JSON_FILE_LOCATION, false); // TODO Não deveria ir direto no repositório, mas no serviço
 
         repository.beginTransaction();
         try {
@@ -64,7 +64,7 @@ public class LibibImport {
                         if ((line.getPublisher() != null) && (line.getPublisher().length() > 0)) {
                             String[] editoras = line.getPublisher().split(",");
                             for (String nomeEditora : editoras) {
-                                Editora editora = repository.getData().getEditoraByNome(nomeEditora);
+                                Editora editora = repository.getData().buscaEditoraPorNome(nomeEditora);
                                 if (editora == null) {
                                     editora = new Editora();
                                     editora.setId(Utils.generateId());

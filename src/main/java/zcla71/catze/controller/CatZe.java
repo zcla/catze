@@ -31,18 +31,19 @@ public class CatZe {
 
     public Index_Stats getIndex() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
-        Index_Stats result = new Index_Stats(service.getObras().size(), service.getLivros().size(), service.getPessoas().size(), service.getEditoras().size());
+        Index_Stats result = new Index_Stats(service.listaObras().size(), service.listaLivros().size(), service.listaPessoas().size(), service.listaEditoras().size());
         return result;
     }
 
     public Collection<Obras_Obra> getObras() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
-        Collection<Obra> obras = service.getObras();
+        Collection<Obra> obras = service.listaObras();
         List<Obras_Obra> result = new ArrayList<>();
         for (Obra obra : obras) {
             result.add(new Obras_Obra(obra));
         }
 
+        // TODO Sai certo daqui, mas o DataTables bagunça depois (acentos no final)
         Collections.sort(result, new Comparator<Obras_Obra>() {
             @Override
             public int compare(Obras_Obra o1, Obras_Obra o2) {
@@ -56,7 +57,7 @@ public class CatZe {
 
     public Collection<Livros_Livro> getLivros() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
-        Collection<Livro> livros = service.getLivros();
+        Collection<Livro> livros = service.listaLivros();
         List<Livros_Livro> result = new ArrayList<>();
         for (Livro livro : livros) {
             result.add(new Livros_Livro(livro));

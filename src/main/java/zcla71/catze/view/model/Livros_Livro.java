@@ -27,9 +27,9 @@ public class Livros_Livro {
 
         Integer qtdOutrosAutores = 0;
         for (String idObra : livro.getIdsObras()) {
-            Obra obra = Service.getInstance().getObraById(idObra);
+            Obra obra = Service.getInstance().buscaObraPorId(idObra);
             for (String idPessoa : obra.getIdsAutores()) {
-                Pessoa autor = Service.getInstance().getPessoaById(idPessoa);
+                Pessoa autor = Service.getInstance().buscaPessoaPorId(idPessoa);
                 if (autorPrincipal == null) {
                     this.autorPrincipal = autor.getNome();
                 } else {

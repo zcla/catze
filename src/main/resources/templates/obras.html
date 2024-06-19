@@ -10,6 +10,7 @@
                     <tr>
                         <th>Título</th>
                         <th>Autor(es)</th>
+                        <th>Livros</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -17,7 +18,10 @@
                         <td th:text="${obra.titulo}"></td>
                         <td>
                             <span th:text="${obra.autorPrincipal}"></span>
-                            <span class="badge text-bg-primary float-end" th:text="${obra.qtdOutrosAutores}" th:title="${obra.outrosAutores}"></span>
+                            <span class="badge text-bg-secondary ml-2" th:text="'+' + ${obra.qtdOutrosAutores}" th:if="${obra.qtdOutrosAutores > 0}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${obra.qtdLivros}"></span>
                         </td>
                     </tr>
                 </tbody>

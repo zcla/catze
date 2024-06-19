@@ -32,33 +32,41 @@ public class Service {
 
     // Editoras
 
-    public Collection<Editora> getEditoras() throws StreamReadException, DatabindException, IOException {
+    public Collection<Editora> listaEditoras() throws StreamReadException, DatabindException, IOException {
         return this.repository.getData().getEditoras();
+    }
+
+    public Editora buscaEditoraPorNome(String nome) {
+        return this.repository.getData().buscaEditoraPorNome(nome);
     }
 
     // Livros
 
-    public Collection<Livro> getLivros() throws StreamReadException, DatabindException, IOException {
+    public Collection<Livro> listaLivros() throws StreamReadException, DatabindException, IOException {
         return this.repository.getData().getLivros();
+    }
+
+    public Collection<Livro> listaLivrosDaObra(String idObra) throws StreamReadException, DatabindException, IOException {
+        return this.listaLivros().stream().filter(l -> l.getIdsObras().contains(idObra)).toList();
     }
 
     // Obras
 
-    public Collection<Obra> getObras() throws StreamReadException, DatabindException, IOException {
+    public Collection<Obra> listaObras() throws StreamReadException, DatabindException, IOException {
         return this.repository.getData().getObras();
     }
 
-    public Obra getObraById(String id) {
-        return this.repository.getData().getObraById(id);
+    public Obra buscaObraPorId(String id) {
+        return this.repository.getData().buscaObraPorId(id);
     }
 
     // Pessoas
 
-    public Collection<Pessoa> getPessoas() throws StreamReadException, DatabindException, IOException {
+    public Collection<Pessoa> listaPessoas() throws StreamReadException, DatabindException, IOException {
         return this.repository.getData().getPessoas();
     }
 
-    public Pessoa getPessoaById(String id) throws StreamReadException, DatabindException, IOException {
-        return this.repository.getData().getPessoaById(id);
+    public Pessoa buscaPessoaPorId(String id) throws StreamReadException, DatabindException, IOException {
+        return this.repository.getData().buscaPessoaPorId(id);
     }
 }

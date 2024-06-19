@@ -16,26 +16,24 @@ import zcla71.catze.service.model.Pessoa;
 public class Obras_Obra {
     private String titulo;
     private String autorPrincipal;
-    private String qtdOutrosAutores;
-    private String outrosAutores;
+    private Integer qtdOutrosAutores;
+    private Integer qtdLivros;
 
     public Obras_Obra(Obra obra) throws StreamReadException, DatabindException, IOException {
         this.titulo = obra.getTitulo();
-        this.qtdOutrosAutores = null;
-        this.outrosAutores = "";
 
-        Integer qtdOutrosAutores = 0;
+        this.autorPrincipal = null;
+        this.qtdOutrosAutores = 0;
+        Service service = Service.getInstance();
         for (String idPessoa : obra.getIdsAutores()) {
-            Pessoa autor = Service.getInstance().getPessoaById(idPessoa);
-            if (autorPrincipal == null) {
+            Pessoa autor = service.buscaPessoaPorId(idPessoa);
+            if (this.autorPrincipal == null) {
                 this.autorPrincipal = autor.getNome();
             } else {
-                qtdOutrosAutores++;
-                this.outrosAutores += autor.getNome() + "\n";
+                this.qtdOutrosAutores++;
             }
         }
-        if (qtdOutrosAutores > 0) {
-            this.qtdOutrosAutores = "+" + qtdOutrosAutores;
-        }
+
+        this.qtdLivros = service.listaLivrosDaObra(obra.getId()).size();
     }
 }
