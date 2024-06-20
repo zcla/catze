@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.DatabindException;
 
 import lombok.Data;
 import zcla71.catze.service.Service;
+import zcla71.catze.service.model.Editora;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.Obra;
 import zcla71.catze.service.model.Pessoa;
@@ -15,31 +16,40 @@ import zcla71.catze.service.model.Pessoa;
 public class Livros_Livro {
     private String titulo;
     private String autorPrincipal;
-    private String qtdOutrosAutores;
-    private String outrosAutores;
+    private Integer qtdOutrosAutores;
     private String isbn;
+    private String editoraPrincipal;
+    private Integer qtdOutrasEditoras;
 
     public Livros_Livro(Livro livro) throws StreamReadException, DatabindException, IOException {
-        this.titulo = livro.getTitulo();
-        this.qtdOutrosAutores = null;
-        this.outrosAutores = null;
-        this.isbn = (livro.getIsbn13() != null ? livro.getIsbn13() : livro.getIsbn10());
+        Service service = Service.getInstance();
 
-        Integer qtdOutrosAutores = 0;
+        this.titulo = livro.getTitulo();
+
+        this.autorPrincipal = null;
+        this.qtdOutrosAutores = 0;
         for (String idObra : livro.getIdsObras()) {
-            Obra obra = Service.getInstance().buscaObraPorId(idObra);
+            Obra obra = service.buscaObraPorId(idObra);
             for (String idPessoa : obra.getIdsAutores()) {
-                Pessoa autor = Service.getInstance().buscaPessoaPorId(idPessoa);
+                Pessoa autor = service.buscaPessoaPorId(idPessoa);
                 if (autorPrincipal == null) {
                     this.autorPrincipal = autor.getNome();
                 } else {
-                    qtdOutrosAutores++;
-                    this.outrosAutores += autor.getNome() + "\n";
+                    this.qtdOutrosAutores++;
                 }
             }
         }
-        if (qtdOutrosAutores > 0) {
-            this.qtdOutrosAutores = "+" + qtdOutrosAutores;
+
+        this.isbn = (livro.getIsbn13() != null ? livro.getIsbn13() : livro.getIsbn10());
+
+        this.qtdOutrasEditoras = 0;
+        for (String idEditora : livro.getIdsEditoras()) {
+            Editora editora = service.buscaEditoraPorId(idEditora);
+            if (editoraPrincipal == null) {
+                this.editoraPrincipal = editora.getNome();
+            } else {
+                this.qtdOutrasEditoras++;
+            }
         }
     }
 }

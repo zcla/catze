@@ -9,8 +9,9 @@
                 <thead>
                     <tr>
                         <th>Título</th>
-                        <th>Autor(es)</th>
+                        <th>Autores</th>
                         <th>ISBN</th>
+                        <th>Editoras</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -18,9 +19,13 @@
                         <td th:text="${livro.titulo}"></td>
                         <td>
                             <span th:text="${livro.autorPrincipal}"></span>
-                            <span class="badge text-bg-primary float-end" th:text="${livro.qtdOutrosAutores}" th:title="${livro.outrosAutores}"></span>
+                            <span class="badge text-bg-secondary ml-2" th:text="'+' + ${livro.qtdOutrosAutores}" th:if="${livro.qtdOutrosAutores > 0}"></span>
                         </td>
                         <td th:text="${livro.isbn}"></td>
+                        <td>
+                            <span th:text="${livro.editoraPrincipal}"></span>
+                            <span class="badge text-bg-secondary ml-2" th:text="'+' + ${livro.qtdOutrasEditoras}" th:if="${livro.qtdOutrasEditoras > 0}"></span>
+                        </td>
                     </tr>
                 </tbody>
             </table>

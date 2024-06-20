@@ -36,6 +36,10 @@ public class Service {
         return this.repository.getData().getEditoras();
     }
 
+    public Editora buscaEditoraPorId(String id) {
+        return this.repository.getData().buscaEditoraPorId(id);
+    }
+
     public Editora buscaEditoraPorNome(String nome) {
         return this.repository.getData().buscaEditoraPorNome(nome);
     }

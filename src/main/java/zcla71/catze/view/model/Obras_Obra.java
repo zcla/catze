@@ -20,11 +20,12 @@ public class Obras_Obra {
     private Integer qtdLivros;
 
     public Obras_Obra(Obra obra) throws StreamReadException, DatabindException, IOException {
+        Service service = Service.getInstance();
+
         this.titulo = obra.getTitulo();
 
         this.autorPrincipal = null;
         this.qtdOutrosAutores = 0;
-        Service service = Service.getInstance();
         for (String idPessoa : obra.getIdsAutores()) {
             Pessoa autor = service.buscaPessoaPorId(idPessoa);
             if (this.autorPrincipal == null) {

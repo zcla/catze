@@ -23,15 +23,19 @@ public class CatZeRepositoryData {
         this.editoras = new ArrayList<>();
     }
 
+    public Editora buscaEditoraPorId(String id) {
+        return this.editoras.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    public Editora buscaEditoraPorNome(String nome) {
+        return this.editoras.stream().filter(p -> p.getNome().equals(nome)).findFirst().orElse(null);
+    }
+
     public Pessoa buscaPessoaPorId(String id) {
         return this.pessoas.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
     }
 
     public Obra buscaObraPorId(String id) {
         return this.obras.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
-    }
-
-    public Editora buscaEditoraPorNome(String nome) {
-        return this.editoras.stream().filter(p -> p.getNome().equals(nome)).findFirst().orElse(null);
     }
 }
