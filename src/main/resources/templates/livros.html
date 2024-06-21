@@ -11,6 +11,7 @@
                         <th>Título</th>
                         <th>Obras</th>
                         <th>Autores</th>
+                        <th>Ano</th>
                         <th>ISBN</th>
                         <th>Editoras</th>
                     </tr>
@@ -23,6 +24,7 @@
                             <span th:text="${livro.autorPrincipal}"></span>
                             <span class="badge text-bg-secondary ml-2" th:text="'+' + ${livro.qtdOutrosAutores}" th:if="${livro.qtdOutrosAutores > 0}"></span>
                         </td>
+                        <td th:text="${livro.ano}"></td>
                         <td th:text="${livro.isbn}"></td>
                         <td>
                             <span th:text="${livro.editoraPrincipal}"></span>

@@ -21,6 +21,7 @@ public class Livros {
     private String isbn;
     private String editoraPrincipal;
     private Integer qtdOutrasEditoras;
+    private Integer ano;
 
     public Livros(Livro livro) throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
@@ -53,5 +54,7 @@ public class Livros {
                 this.qtdOutrasEditoras++;
             }
         }
+
+        this.ano = livro.getAno();
     }
 }

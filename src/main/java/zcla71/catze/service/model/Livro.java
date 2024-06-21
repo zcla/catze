@@ -12,4 +12,5 @@ public class Livro {
     private String isbn13;
     private String isbn10;
     private Collection<String> idsEditoras;
+    private Integer ano;
 }

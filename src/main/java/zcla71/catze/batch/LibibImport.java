@@ -74,6 +74,11 @@ public class LibibImport {
                                 livro.getIdsEditoras().add(editora.getId());
                             }
                         }
+                        try {
+                            livro.setAno(Integer.parseInt(line.getPublishDate().split("-")[0]));
+                        } catch (Exception e) {
+                            // ignora erros de parsing
+                        }
                         repository.getData().getLivros().add(livro);
                         break;
 
@@ -84,6 +89,7 @@ public class LibibImport {
             repository.commitTransaction();
         } catch (Exception e) {
             repository.rollbackTransaction();
+            throw e;
         }
     }
 
