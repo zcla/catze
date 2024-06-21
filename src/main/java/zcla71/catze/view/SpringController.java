@@ -16,7 +16,7 @@ public class SpringController {
     @GetMapping("/")
     public String index(Model model) throws StreamReadException, DatabindException, IOException {
         CatZe catZe = CatZe.getInstance();
-        model.addAttribute("stats", catZe.getIndex());
+        model.addAttribute("stats", catZe.getStats());
         return "index";
     }
 
@@ -32,5 +32,12 @@ public class SpringController {
         CatZe catZe = CatZe.getInstance();
         model.addAttribute("obras", catZe.getObras());
         return "obras";
+    }
+
+    @GetMapping("/pessoas")
+    public String pessoas(Model model) throws StreamReadException, DatabindException, IOException {
+        CatZe catZe = CatZe.getInstance();
+        model.addAttribute("pessoas", catZe.getPessoas());
+        return "pessoas";
     }
 }

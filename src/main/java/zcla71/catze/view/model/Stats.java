@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Index_Stats {
+public class Stats {
     private Integer obras;
     private Integer livros;
     private Integer pessoas;

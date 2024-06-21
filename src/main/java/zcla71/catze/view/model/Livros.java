@@ -13,7 +13,7 @@ import zcla71.catze.service.model.Obra;
 import zcla71.catze.service.model.Pessoa;
 
 @Data
-public class Livros_Livro {
+public class Livros {
     private String titulo;
     private String autorPrincipal;
     private Integer qtdOutrosAutores;
@@ -21,7 +21,7 @@ public class Livros_Livro {
     private String editoraPrincipal;
     private Integer qtdOutrasEditoras;
 
-    public Livros_Livro(Livro livro) throws StreamReadException, DatabindException, IOException {
+    public Livros(Livro livro) throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
 
         this.titulo = livro.getTitulo();

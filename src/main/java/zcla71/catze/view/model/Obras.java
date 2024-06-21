@@ -13,13 +13,13 @@ import zcla71.catze.service.model.Pessoa;
 
 @Data
 @AllArgsConstructor
-public class Obras_Obra {
+public class Obras {
     private String titulo;
     private String autorPrincipal;
     private Integer qtdOutrosAutores;
     private Integer qtdLivros;
 
-    public Obras_Obra(Obra obra) throws StreamReadException, DatabindException, IOException {
+    public Obras(Obra obra) throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
 
         this.titulo = obra.getTitulo();
