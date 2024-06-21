@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.DatabindException;
 
 import lombok.Data;
 import zcla71.catze.service.Service;
+import zcla71.catze.service.model.Colecao;
 import zcla71.catze.service.model.Editora;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.Obra;
@@ -22,6 +23,7 @@ public class Livros {
     private String editoraPrincipal;
     private Integer qtdOutrasEditoras;
     private Integer ano;
+    private String colecao;
 
     public Livros(Livro livro) throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
@@ -56,5 +58,10 @@ public class Livros {
         }
 
         this.ano = livro.getAno();
+
+        Colecao colecao = service.listaColecoes().stream().filter(c -> c.getIdsLivros().contains(livro.getId())).findFirst().orElse(null);
+        if (colecao != null) {
+            this.colecao = colecao.getNome();
+        }
     }
 }
