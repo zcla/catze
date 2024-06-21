@@ -1,0 +1,174 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{_fragments::head}"></head>
+    <style>
+        .row {
+            margin-bottom: 1.75em;
+        }
+    </style>
+    <script>
+        $(document).ready( function () {
+            new Chart(document.getElementById('grafBar'), {
+                type: 'bar',
+                data: {
+                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                    }]
+                }
+            });
+            new Chart(document.getElementById('grafPie'), {
+                type: 'pie',
+                data: {
+                    labels: [
+                        'Red',
+                        'Blue',
+                        'Yellow'
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [300, 50, 100],
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 4
+                    }]
+                }
+            });
+            new Chart(document.getElementById('grafDoughnut'), {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        'Red',
+                        'Blue',
+                        'Yellow'
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [300, 50, 100],
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 4
+                    }]
+                }
+            });
+            new Chart(document.getElementById('grafLine'), {
+                type: 'line',
+                data: {
+                    labels: [
+                        "Janeiro",
+                        "Fevereiro",
+                        "Março",
+                        "Abril",
+                        "Maio",
+                        "Junho",
+                        "Julho"
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [65, 59, 80, 81, 56, 55, 40],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                }
+            });
+        });
+        </script>
+    <body>
+        <nav th:replace="~{_fragments::nav}"></nav>
+        <div id="stats" class="container-fluid">
+            <h1>Catálogo do Zé</h1>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Obras</h5>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-text text-center" th:text="${stats.obras}"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Livros</h5>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-text text-center" th:text="${stats.livros}"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Pessoas</h5>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-text text-center" th:text="${stats.pessoas}"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Editoras</h5>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-text text-center" th:text="${stats.editoras}"></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Gráfico</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="grafPie"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Gráfico</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="grafBar"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Gráfico</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="grafDoughnut"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Gráfico</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="grafLine"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>

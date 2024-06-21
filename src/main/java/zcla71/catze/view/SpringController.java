@@ -15,9 +15,7 @@ import zcla71.catze.controller.CatZe;
 public class SpringController {
     @GetMapping("/")
     public String index(Model model) throws StreamReadException, DatabindException, IOException {
-        CatZe catZe = CatZe.getInstance();
-        model.addAttribute("stats", catZe.getStats());
-        return "index";
+        return stats(model);
     }
 
     @GetMapping("/editoras")
@@ -46,5 +44,12 @@ public class SpringController {
         CatZe catZe = CatZe.getInstance();
         model.addAttribute("pessoas", catZe.getPessoas());
         return "pessoas";
+    }
+
+    @GetMapping("/stats")
+    public String stats(Model model) throws StreamReadException, DatabindException, IOException {
+        CatZe catZe = CatZe.getInstance();
+        model.addAttribute("stats", catZe.getStats());
+        return "stats";
     }
 }
