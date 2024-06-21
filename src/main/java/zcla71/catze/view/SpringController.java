@@ -20,6 +20,13 @@ public class SpringController {
         return "index";
     }
 
+    @GetMapping("/editoras")
+    public String editoras(Model model) throws StreamReadException, DatabindException, IOException {
+        CatZe catZe = CatZe.getInstance();
+        model.addAttribute("editoras", catZe.getEditoras());
+        return "editoras";
+    }
+
     @GetMapping("/livros")
     public String livros(Model model) throws StreamReadException, DatabindException, IOException {
         CatZe catZe = CatZe.getInstance();

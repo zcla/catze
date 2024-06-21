@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{_fragments::head}"></head>
+    <body>
+        <nav  th:replace="~{_fragments::nav}"></nav>
+        <div class="container-fluid">
+            <h1>Editoras</h1>
+            <table id="editoras" class="table datatable table-sm table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Livros</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="editora:${editoras}">
+                        <td th:text="${editora.nome}"></td>
+                        <td th:text="${editora.qtdLivros}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
