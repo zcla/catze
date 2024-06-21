@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import lombok.Data;
+import zcla71.catze.service.model.Colecao;
 import zcla71.catze.service.model.Editora;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.Obra;
@@ -15,12 +16,18 @@ public class CatZeRepositoryData {
     private Collection<Obra> obras;
     private Collection<Pessoa> pessoas;
     private Collection<Editora> editoras;
+    private Collection<Colecao> colecoes;
 
     public CatZeRepositoryData() {
         this.livros = new ArrayList<>();
         this.obras = new ArrayList<>();
         this.pessoas = new ArrayList<>();
         this.editoras = new ArrayList<>();
+        this.colecoes = new ArrayList<>();
+    }
+
+    public Colecao buscaColecaoPorNome(String nome) {
+        return this.colecoes.stream().filter(p -> p.getNome().equals(nome)).findFirst().orElse(null);
     }
 
     public Editora buscaEditoraPorId(String id) {

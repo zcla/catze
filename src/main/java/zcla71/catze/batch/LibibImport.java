@@ -14,6 +14,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import zcla71.catze.batch.model.LibibCsvLine;
 import zcla71.catze.repository.Repository;
 import zcla71.catze.repository.model.CatZeRepositoryData;
+import zcla71.catze.service.model.Colecao;
 import zcla71.catze.service.model.Editora;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.ObraLiteraria;
@@ -80,6 +81,18 @@ public class LibibImport {
                             // ignora erros de parsing
                         }
                         repository.getData().getLivros().add(livro);
+
+                        if ((line.getGroup() != null) && (line.getGroup().length() > 0)) {
+                            Colecao colecao = repository.getData().buscaColecaoPorNome(line.getGroup());
+                            if (colecao == null) {
+                                colecao = new Colecao();
+                                colecao.setId(Utils.generateId());
+                                colecao.setNome(line.getGroup());
+                                colecao.setIdsLivros(new ArrayList<>());
+                                repository.getData().getColecoes().add(colecao);
+                            }
+                            colecao.getIdsLivros().add(livro.getId());
+                        }
                         break;
 
                     default:
