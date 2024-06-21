@@ -15,6 +15,7 @@ import zcla71.catze.service.model.Pessoa;
 @Data
 public class Livros {
     private String titulo;
+    private Integer qtdObras;
     private String autorPrincipal;
     private Integer qtdOutrosAutores;
     private String isbn;
@@ -25,6 +26,7 @@ public class Livros {
         Service service = Service.getInstance();
 
         this.titulo = livro.getTitulo();
+        this.qtdObras = livro.getIdsObras().size();
 
         this.autorPrincipal = null;
         this.qtdOutrosAutores = 0;
