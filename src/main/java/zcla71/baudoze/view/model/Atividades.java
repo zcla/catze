@@ -20,7 +20,7 @@ public class Atividades {
         Service service = Service.getInstance();
 
         this.data = atividade.getData();
-        this.tipo = atividade.getTipo().name();
+        this.tipo = atividade.getTipo().getTexto();
         this.livro = service.buscaLivroPorId(atividade.getIdLivro()).getTitulo();
     }
 }
