@@ -10,6 +10,7 @@ import zcla71.catze.repository.Repository;
 import zcla71.catze.repository.model.CatZeRepositoryData;
 import zcla71.catze.service.model.Colecao;
 import zcla71.catze.service.model.Editora;
+import zcla71.catze.service.model.Etiqueta;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.Obra;
 import zcla71.catze.service.model.Pessoa;
@@ -49,6 +50,12 @@ public class Service {
 
     public Editora buscaEditoraPorNome(String nome) {
         return this.repository.getData().buscaEditoraPorNome(nome);
+    }
+
+    // Etiquetas
+
+    public Collection<Etiqueta> listaEtiquetas() throws StreamReadException, DatabindException, IOException {
+        return this.repository.getData().getEtiquetas();
     }
 
     // Livros

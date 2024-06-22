@@ -11,4 +11,5 @@ public class Stats {
     private Integer pessoas;
     private Integer editoras;
     private Integer colecoes;
+    private Integer etiquetas;
 }
