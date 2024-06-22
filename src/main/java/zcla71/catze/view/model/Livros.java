@@ -1,6 +1,8 @@
 package zcla71.catze.view.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -9,6 +11,7 @@ import lombok.Data;
 import zcla71.catze.service.Service;
 import zcla71.catze.service.model.Colecao;
 import zcla71.catze.service.model.Editora;
+import zcla71.catze.service.model.Etiqueta;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.Obra;
 import zcla71.catze.service.model.Pessoa;
@@ -24,6 +27,7 @@ public class Livros {
     private Integer qtdOutrasEditoras;
     private Integer ano;
     private String colecao;
+    private Collection<String> etiquetas;
 
     public Livros(Livro livro) throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
@@ -62,6 +66,12 @@ public class Livros {
         Colecao colecao = service.listaColecoes().stream().filter(c -> c.getIdsLivros().contains(livro.getId())).findFirst().orElse(null);
         if (colecao != null) {
             this.colecao = colecao.getNome();
+        }
+
+        Collection<Etiqueta> etiquetas = service.listaEtiquetas().stream().filter(e -> livro.getIdsEtiquetas().contains(e.getId())).toList();
+        this.etiquetas = new ArrayList<>();
+        for (Etiqueta etiqueta : etiquetas) {
+            this.etiquetas.add(etiqueta.getNome());
         }
     }
 }

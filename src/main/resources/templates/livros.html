@@ -15,6 +15,7 @@
                         <th>ISBN</th>
                         <th>Editoras</th>
                         <th>Coleção</th>
+                        <th>Etiquetas</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,11 @@
                             <span class="badge text-bg-secondary ml-2" th:text="'+' + ${livro.qtdOutrasEditoras}" th:if="${livro.qtdOutrasEditoras > 0}"></span>
                         </td>
                         <td th:text="${livro.colecao}"></td>
+                        <td>
+                            <div th:each="etiqueta:${livro.etiquetas}">
+                                <span th:text="${etiqueta}"></span>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
