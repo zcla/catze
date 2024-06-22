@@ -8,10 +8,13 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 import zcla71.baudoze.batch.model.LibibCsvLine;
+import zcla71.baudoze.batch.model.Notes;
 import zcla71.baudoze.repository.Repository;
 import zcla71.baudoze.repository.model.BauDoZeRepositoryData;
 import zcla71.baudoze.service.model.Colecao;
@@ -34,6 +37,41 @@ public class LibibImport {
             for (LibibCsvLine line : libib) {
                 switch (line.getItemType()) {
                     case "book":
+                        String publisher = line.getPublisher();
+                        Integer publishDate = null;
+                        try {
+                            publishDate = Integer.parseInt(line.getPublishDate().split("-")[0]);
+                        } catch (NumberFormatException e) {
+                            // ignora erros de parsing
+                        }
+                        Integer length = null;
+                        try {
+                            length = Integer.parseInt(line.getLength());
+                        } catch (NumberFormatException e) {
+                            // ignora erros de parsing
+                        }
+                        if ((line.getNotes() != null) && (line.getNotes().length() > 0)) {
+                            try {
+                                ObjectMapper objectMapper = new ObjectMapper();
+                                Notes notes = objectMapper.readValue(line.getNotes(), Notes.class);
+                                // ignora notes.id
+                                // TODO notes.edicao
+                                if (notes.getEditora() != null) {
+                                    publisher = notes.getEditora();
+                                }
+                                if (notes.getPublicacao() != null) {
+                                    publishDate = notes.getPublicacao();
+                                }
+                                // TODO notes.publicacao
+                                if (notes.getPaginas() != null) {
+                                    length = notes.getPaginas();
+                                }
+                            } catch (JsonParseException e) {
+                                System.err.println("Erro ao fazer o parsing da nota \"" + line.getNotes() + "\":");
+                                System.err.println(e);
+                            }
+                        }
+
                         ObraLiteraria obra = new ObraLiteraria();
                         obra.setId(Utils.generateId());
                         obra.setTitulo(line.getTitle());
@@ -63,8 +101,8 @@ public class LibibImport {
                             livro.setIsbn10(line.getUpcIsbn10());
                         }
                         livro.setIdsEditoras(new ArrayList<>());
-                        if ((line.getPublisher() != null) && (line.getPublisher().length() > 0)) {
-                            String[] editoras = line.getPublisher().split(",");
+                        if ((publisher != null) && (publisher.length() > 0)) {
+                            String[] editoras = publisher.split(",");
                             for (String nomeEditora : editoras) {
                                 Editora editora = repository.getData().buscaEditoraPorNome(nomeEditora);
                                 if (editora == null) {
@@ -76,17 +114,8 @@ public class LibibImport {
                                 livro.getIdsEditoras().add(editora.getId());
                             }
                         }
-                        try {
-                            livro.setAno(Integer.parseInt(line.getPublishDate().split("-")[0]));
-                        } catch (NumberFormatException e) {
-                            // ignora erros de parsing
-                        }
-                        try {
-                            livro.setPaginas(Integer.parseInt(line.getLength()));
-                        } catch (NumberFormatException e) {
-                            // ignora erros de parsing
-                        }
-                        // TODO notes
+                        livro.setAno(publishDate);
+                        livro.setPaginas(length);
                         // TODO added
                         repository.getData().getLivros().add(livro);
 
