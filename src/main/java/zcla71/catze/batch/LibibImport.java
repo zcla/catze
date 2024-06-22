@@ -106,7 +106,7 @@ public class LibibImport {
                                     etiqueta.setNome(tag);
                                     repository.getData().getEtiquetas().add(etiqueta);
                                 }
-                                livro.getIdsEtiquetas().add(livro.getId());
+                                livro.getIdsEtiquetas().add(etiqueta.getId());
                             }
                         }
 
