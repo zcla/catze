@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>zcla71</groupId>
-	<artifactId>catze</artifactId>
+	<artifactId>baudoze</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Catálogo do Zé</name>
-	<description>Catálogo pro Zé encaixar tudo o que quiser :)</description>
+	<name>Baú do Zé</name>
+	<description>Baú pro Zé jogar tudo o que quiser :)</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
