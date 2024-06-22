@@ -5,7 +5,13 @@
         $(document).ready( function () {
             $('table.datatable').DataTable(
                 {
-                    language: DATATABLE_LANGUAGE
+                    language: DATATABLE_LANGUAGE,
+                    columnDefs: [
+                        {
+                            targets: 6,
+                            className: 'dt-body-right'
+                        }
+                    ]
                 }
             );
         });
