@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import lombok.Data;
+import zcla71.baudoze.service.model.Atividade;
 import zcla71.baudoze.service.model.Colecao;
 import zcla71.baudoze.service.model.Editora;
 import zcla71.baudoze.service.model.Etiqueta;
@@ -19,6 +20,7 @@ public class BauDoZeRepositoryData {
     private Collection<Editora> editoras;
     private Collection<Colecao> colecoes;
     private Collection<Etiqueta> etiquetas;
+    private Collection<Atividade> atividades;
 
     public BauDoZeRepositoryData() {
         this.livros = new ArrayList<>();
@@ -27,11 +29,16 @@ public class BauDoZeRepositoryData {
         this.editoras = new ArrayList<>();
         this.colecoes = new ArrayList<>();
         this.etiquetas = new ArrayList<>();
+        this.atividades = new ArrayList<>();
     }
+
+    // colecoes
 
     public Colecao buscaColecaoPorNome(String nome) {
         return this.colecoes.stream().filter(c -> c.getNome().equals(nome)).findFirst().orElse(null);
     }
+
+    // editoras
 
     public Editora buscaEditoraPorId(String id) {
         return this.editoras.stream().filter(e -> e.getId().equals(id)).findFirst().orElse(null);
@@ -41,17 +48,25 @@ public class BauDoZeRepositoryData {
         return this.editoras.stream().filter(e -> e.getNome().equals(nome)).findFirst().orElse(null);
     }
 
+    // etiquetas
+
     public Etiqueta buscaEtiquetaPorNome(String nome) {
         return this.etiquetas.stream().filter(e -> e.getNome().equals(nome)).findFirst().orElse(null);
     }
+
+    // livros
 
     public Livro buscaLivroPorId(String id) {
         return this.livros.stream().filter(l -> l.getId().equals(id)).findFirst().orElse(null);
     }
 
+    // pessoas
+
     public Pessoa buscaPessoaPorId(String id) {
         return this.pessoas.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
     }
+
+    // obras
 
     public Obra buscaObraPorId(String id) {
         return this.obras.stream().filter(o -> o.getId().equals(id)).findFirst().orElse(null);

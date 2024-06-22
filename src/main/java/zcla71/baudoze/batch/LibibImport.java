@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +19,14 @@ import zcla71.baudoze.batch.model.LibibCsvLine;
 import zcla71.baudoze.batch.model.Notes;
 import zcla71.baudoze.repository.Repository;
 import zcla71.baudoze.repository.model.BauDoZeRepositoryData;
+import zcla71.baudoze.service.model.Atividade;
 import zcla71.baudoze.service.model.Colecao;
 import zcla71.baudoze.service.model.Editora;
 import zcla71.baudoze.service.model.Etiqueta;
 import zcla71.baudoze.service.model.Livro;
 import zcla71.baudoze.service.model.ObraLiteraria;
 import zcla71.baudoze.service.model.Pessoa;
+import zcla71.baudoze.service.model.Atividade.Tipo;
 import zcla71.util.Utils;
 
 public class LibibImport {
@@ -117,7 +121,6 @@ public class LibibImport {
                         livro.setAno(publishDate);
                         livro.setPaginas(length);
                         livro.setEdicao(edicao);
-                        // TODO added
                         repository.getData().getLivros().add(livro);
 
                         if ((line.getGroup() != null) && (line.getGroup().length() > 0)) {
@@ -147,9 +150,34 @@ public class LibibImport {
                             }
                         }
 
-                        // TODO status
-                        // TODO began
-                        // TODO completed
+                        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                        String added = line.getAdded().trim();
+                        LocalDate ldAdded = LocalDate.parse(added, dateFormat);
+                        Atividade cadastro = new Atividade(Tipo.CADASTRO, ldAdded, livro.getId());
+                        repository.getData().getAtividades().add(cadastro);
+
+                        String began = line.getBegan().trim();
+                        if ((began != null) && (began.length() > 0)) {
+                            LocalDate ldBegan = LocalDate.parse(began, dateFormat);
+                            Atividade inicioLeitura = new Atividade(Tipo.INICIO_LEITURA, ldBegan, livro.getId());
+                            repository.getData().getAtividades().add(inicioLeitura);
+                        }
+
+                        String completed = line.getCompleted().trim();
+                        String status = line.getStatus().trim();
+                        if ((completed != null) && (completed.length() > 0)) {
+                            LocalDate ldCompleted = LocalDate.parse(completed, dateFormat);
+                            switch (status) {
+                                case "Completed":
+                                    Atividade terminoLeitura = new Atividade(Tipo.TERMINO_LEITURA, ldCompleted, livro.getId());
+                                    repository.getData().getAtividades().add(terminoLeitura);
+                                    break;
+
+                                default:
+                                    throw new RuntimeException("Status desconhecido: " + status);
+                            }
+                        }
 
                         break;
 

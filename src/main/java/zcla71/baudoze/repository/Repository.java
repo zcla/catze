@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import lombok.Getter;
 
@@ -57,7 +58,9 @@ public class Repository<T> {
     }
 
     private ObjectMapper getObjectMapper() {
-        return new ObjectMapper();
+        ObjectMapper result = new ObjectMapper();
+        result.registerModule(new JavaTimeModule());
+        return result;
     }
 
     private File getFile() {
