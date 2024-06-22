@@ -62,7 +62,6 @@ public class LibibImport {
                                 if (notes.getPublicacao() != null) {
                                     publishDate = notes.getPublicacao();
                                 }
-                                // TODO notes.publicacao
                                 if (notes.getPaginas() != null) {
                                     length = notes.getPaginas();
                                 }
