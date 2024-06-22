@@ -10,12 +10,14 @@
                     <tr>
                         <th>Nome</th>
                         <th>Livros</th>
+                        <th>Páginas</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="colecao:${colecoes}">
                         <td th:text="${colecao.nome}"></td>
                         <td th:text="${colecao.qtdLivros}"></td>
+                        <td th:text="${colecao.paginas}"></td>
                     </tr>
                 </tbody>
             </table>

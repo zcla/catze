@@ -30,19 +30,23 @@ public class BauDoZeRepositoryData {
     }
 
     public Colecao buscaColecaoPorNome(String nome) {
-        return this.colecoes.stream().filter(p -> p.getNome().equals(nome)).findFirst().orElse(null);
+        return this.colecoes.stream().filter(c -> c.getNome().equals(nome)).findFirst().orElse(null);
     }
 
     public Editora buscaEditoraPorId(String id) {
-        return this.editoras.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
+        return this.editoras.stream().filter(e -> e.getId().equals(id)).findFirst().orElse(null);
     }
 
     public Editora buscaEditoraPorNome(String nome) {
-        return this.editoras.stream().filter(p -> p.getNome().equals(nome)).findFirst().orElse(null);
+        return this.editoras.stream().filter(e -> e.getNome().equals(nome)).findFirst().orElse(null);
     }
 
     public Etiqueta buscaEtiquetaPorNome(String nome) {
-        return this.etiquetas.stream().filter(p -> p.getNome().equals(nome)).findFirst().orElse(null);
+        return this.etiquetas.stream().filter(e -> e.getNome().equals(nome)).findFirst().orElse(null);
+    }
+
+    public Livro buscaLivroPorId(String id) {
+        return this.livros.stream().filter(l -> l.getId().equals(id)).findFirst().orElse(null);
     }
 
     public Pessoa buscaPessoaPorId(String id) {
@@ -50,6 +54,6 @@ public class BauDoZeRepositoryData {
     }
 
     public Obra buscaObraPorId(String id) {
-        return this.obras.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
+        return this.obras.stream().filter(o -> o.getId().equals(id)).findFirst().orElse(null);
     }
 }

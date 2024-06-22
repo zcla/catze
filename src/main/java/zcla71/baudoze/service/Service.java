@@ -60,6 +60,10 @@ public class Service {
 
     // Livros
 
+    public Livro buscaLivroPorId(String id) {
+        return this.repository.getData().buscaLivroPorId(id);
+    }
+
     public Collection<Livro> listaLivros() throws StreamReadException, DatabindException, IOException {
         return this.repository.getData().getLivros();
     }
