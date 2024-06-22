@@ -18,6 +18,13 @@ public class SpringController {
         return stats(model);
     }
 
+    @GetMapping("/atividades")
+    public String atividades(Model model) throws StreamReadException, DatabindException, IOException {
+        BauDoZe bauDoZe = BauDoZe.getInstance();
+        model.addAttribute("atividades", bauDoZe.getAtividades());
+        return "atividades";
+    }
+
     @GetMapping("/colecoes")
     public String colecoes(Model model) throws StreamReadException, DatabindException, IOException {
         BauDoZe bauDoZe = BauDoZe.getInstance();

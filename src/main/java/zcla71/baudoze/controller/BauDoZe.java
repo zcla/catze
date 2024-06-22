@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 
 import zcla71.baudoze.service.Service;
+import zcla71.baudoze.service.model.Atividade;
 import zcla71.baudoze.service.model.Colecao;
 import zcla71.baudoze.service.model.Editora;
 import zcla71.baudoze.service.model.Etiqueta;
@@ -20,6 +21,7 @@ import zcla71.baudoze.service.model.Livro;
 import zcla71.baudoze.service.model.Obra;
 import zcla71.baudoze.service.model.Pessoa;
 import zcla71.baudoze.view.model.Stats;
+import zcla71.baudoze.view.model.Atividades;
 import zcla71.baudoze.view.model.Colecoes;
 import zcla71.baudoze.view.model.Editoras;
 import zcla71.baudoze.view.model.Etiquetas;
@@ -35,6 +37,25 @@ public class BauDoZe {
             instance = new BauDoZe();
         }
         return instance;
+    }
+
+    public Collection<Atividades> getAtividades() throws StreamReadException, DatabindException, IOException {
+        Service service = Service.getInstance();
+        Collection<Atividade> atividades = service.listaAtividades();
+        List<Atividades> result = new ArrayList<>();
+        for (Atividade atividade : atividades) {
+            result.add(new Atividades(atividade));
+        }
+
+        // Atualmente desnecessário, pois o DataTable já ordena
+        Collections.sort(result, new Comparator<Atividades>() {
+            @Override
+            public int compare(Atividades a1, Atividades a2) {
+                return a1.getData().compareTo(a2.getData());
+            }
+        });
+
+        return result;
     }
 
     public Collection<Colecoes> getColecoes() throws StreamReadException, DatabindException, IOException {

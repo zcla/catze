@@ -1,0 +1,26 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{_fragments::head}"></head>
+    <body>
+        <nav  th:replace="~{_fragments::nav}"></nav>
+        <div class="container-fluid">
+            <h1>Atividades</h1>
+            <table id="atividades" class="table datatable table-sm table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Livro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="atividade:${atividades}">
+                        <td th:text="${atividade.data}"></td>
+                        <td th:text="${atividade.tipo}"></td>
+                        <td th:text="${atividade.livro}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
