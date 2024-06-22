@@ -51,7 +51,7 @@ public class BauDoZe {
         Collections.sort(result, new Comparator<Atividades>() {
             @Override
             public int compare(Atividades a1, Atividades a2) {
-                return a1.getData().compareTo(a2.getData());
+                return a2.getData().compareTo(a1.getData());
             }
         });
 
