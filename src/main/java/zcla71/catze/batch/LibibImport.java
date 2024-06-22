@@ -27,7 +27,7 @@ public class LibibImport {
 
     public static void main(String[] args) throws URISyntaxException, IOException {
         List<LibibCsvLine> libib = readLibib();
-        Repository<CatZeRepositoryData> repository = new Repository<CatZeRepositoryData>(CatZeRepositoryData.class, JSON_FILE_LOCATION, false); // TODO Não deveria ir direto no repositório, mas no serviço
+        Repository<CatZeRepositoryData> repository = new Repository<CatZeRepositoryData>(CatZeRepositoryData.class, JSON_FILE_LOCATION, false);
 
         repository.beginTransaction();
         try {
@@ -81,6 +81,9 @@ public class LibibImport {
                         } catch (Exception e) {
                             // ignora erros de parsing
                         }
+                        // TODO notes
+                        // TODO length
+                        // TODO added
                         repository.getData().getLivros().add(livro);
 
                         if ((line.getGroup() != null) && (line.getGroup().length() > 0)) {
@@ -109,6 +112,10 @@ public class LibibImport {
                                 livro.getIdsEtiquetas().add(etiqueta.getId());
                             }
                         }
+
+                        // TODO status
+                        // TODO began
+                        // TODO completed
 
                         break;
 
