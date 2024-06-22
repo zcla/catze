@@ -16,6 +16,7 @@ import zcla71.catze.repository.Repository;
 import zcla71.catze.repository.model.CatZeRepositoryData;
 import zcla71.catze.service.model.Colecao;
 import zcla71.catze.service.model.Editora;
+import zcla71.catze.service.model.Etiqueta;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.ObraLiteraria;
 import zcla71.catze.service.model.Pessoa;
@@ -93,6 +94,22 @@ public class LibibImport {
                             }
                             colecao.getIdsLivros().add(livro.getId());
                         }
+
+                        livro.setIdsEtiquetas(new ArrayList<>());
+                        if ((line.getTags() != null) && (line.getTags().length() > 0)) {
+                            String[] tags = line.getTags().split(",");
+                            for (String tag : tags) {
+                                Etiqueta etiqueta = repository.getData().buscaEtiquetaPorNome(tag);
+                                if (etiqueta == null) {
+                                    etiqueta = new Etiqueta();
+                                    etiqueta.setId(Utils.generateId());
+                                    etiqueta.setNome(tag);
+                                    repository.getData().getEtiquetas().add(etiqueta);
+                                }
+                                livro.getIdsEtiquetas().add(livro.getId());
+                            }
+                        }
+
                         break;
 
                     default:

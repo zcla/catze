@@ -6,6 +6,7 @@ import java.util.Collection;
 import lombok.Data;
 import zcla71.catze.service.model.Colecao;
 import zcla71.catze.service.model.Editora;
+import zcla71.catze.service.model.Etiqueta;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.Obra;
 import zcla71.catze.service.model.Pessoa;
@@ -17,6 +18,7 @@ public class CatZeRepositoryData {
     private Collection<Pessoa> pessoas;
     private Collection<Editora> editoras;
     private Collection<Colecao> colecoes;
+    private Collection<Etiqueta> etiquetas;
 
     public CatZeRepositoryData() {
         this.livros = new ArrayList<>();
@@ -24,6 +26,7 @@ public class CatZeRepositoryData {
         this.pessoas = new ArrayList<>();
         this.editoras = new ArrayList<>();
         this.colecoes = new ArrayList<>();
+        this.etiquetas = new ArrayList<>();
     }
 
     public Colecao buscaColecaoPorNome(String nome) {
@@ -36,6 +39,10 @@ public class CatZeRepositoryData {
 
     public Editora buscaEditoraPorNome(String nome) {
         return this.editoras.stream().filter(p -> p.getNome().equals(nome)).findFirst().orElse(null);
+    }
+
+    public Etiqueta buscaEtiquetaPorNome(String nome) {
+        return this.etiquetas.stream().filter(p -> p.getNome().equals(nome)).findFirst().orElse(null);
     }
 
     public Pessoa buscaPessoaPorId(String id) {
