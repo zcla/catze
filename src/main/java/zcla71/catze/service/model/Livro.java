@@ -14,4 +14,5 @@ public class Livro {
     private Collection<String> idsEditoras;
     private Integer ano;
     private Collection<String> idsEtiquetas;
+    private Integer paginas;
 }

@@ -81,8 +81,12 @@ public class LibibImport {
                         } catch (Exception e) {
                             // ignora erros de parsing
                         }
+                        try {
+                            livro.setPaginas(Integer.parseInt(line.getLength()));
+                        } catch (Exception e) {
+                            // ignora erros de parsing
+                        }
                         // TODO notes
-                        // TODO length
                         // TODO added
                         repository.getData().getLivros().add(livro);
 
