@@ -160,7 +160,13 @@ public class BauDoZe {
 
     public Stats getStats() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
-        Stats result = new Stats(service.listaObras().size(), service.listaLivros().size(), service.listaPessoas().size(), service.listaEditoras().size(), service.listaColecoes().size(), service.listaEtiquetas().size());
+        Stats result = new Stats(service.listaObras().size(),
+                service.listaLivros().size(),
+                service.listaPessoas().size(),
+                service.listaEditoras().size(),
+                service.listaColecoes().size(),
+                service.listaEtiquetas().size(),
+                service.listaAtividades().size());
         return result;
     }
 }

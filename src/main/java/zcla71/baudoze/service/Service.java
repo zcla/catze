@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DatabindException;
 
 import zcla71.baudoze.repository.Repository;
 import zcla71.baudoze.repository.model.BauDoZeRepositoryData;
+import zcla71.baudoze.service.model.Atividade;
 import zcla71.baudoze.service.model.Colecao;
 import zcla71.baudoze.service.model.Editora;
 import zcla71.baudoze.service.model.Etiqueta;
@@ -30,6 +31,12 @@ public class Service {
 
     private Service() throws StreamReadException, DatabindException, IOException {
         this.repository = new Repository<BauDoZeRepositoryData>(BauDoZeRepositoryData.class, JSON_FILE_LOCATION, true);
+    }
+
+    // Atividades
+
+    public Collection<Atividade> listaAtividades() {
+        return this.repository.getData().getAtividades();
     }
 
     // Coleções
