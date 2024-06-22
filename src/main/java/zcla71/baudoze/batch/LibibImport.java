@@ -78,12 +78,12 @@ public class LibibImport {
                         }
                         try {
                             livro.setAno(Integer.parseInt(line.getPublishDate().split("-")[0]));
-                        } catch (Exception e) {
+                        } catch (NumberFormatException e) {
                             // ignora erros de parsing
                         }
                         try {
                             livro.setPaginas(Integer.parseInt(line.getLength()));
-                        } catch (Exception e) {
+                        } catch (NumberFormatException e) {
                             // ignora erros de parsing
                         }
                         // TODO notes
