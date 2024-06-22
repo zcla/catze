@@ -50,12 +50,13 @@ public class LibibImport {
                         } catch (NumberFormatException e) {
                             // ignora erros de parsing
                         }
+                        String edicao = null;
                         if ((line.getNotes() != null) && (line.getNotes().length() > 0)) {
                             try {
                                 ObjectMapper objectMapper = new ObjectMapper();
                                 Notes notes = objectMapper.readValue(line.getNotes(), Notes.class);
                                 // ignora notes.id
-                                // TODO notes.edicao
+                                edicao = notes.getEdicao();
                                 if (notes.getEditora() != null) {
                                     publisher = notes.getEditora();
                                 }
@@ -115,6 +116,7 @@ public class LibibImport {
                         }
                         livro.setAno(publishDate);
                         livro.setPaginas(length);
+                        livro.setEdicao(edicao);
                         // TODO added
                         repository.getData().getLivros().add(livro);
 

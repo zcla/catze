@@ -29,6 +29,7 @@ public class Livros {
     private String colecao;
     private Collection<String> etiquetas;
     private Integer paginas;
+    private String edicao;
 
     public Livros(Livro livro) throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
@@ -76,5 +77,7 @@ public class Livros {
         }
 
         this.paginas = livro.getPaginas();
+
+        this.edicao = livro.getEdicao();
     }
 }

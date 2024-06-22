@@ -13,10 +13,11 @@
                         <th>Autores</th>
                         <th>Ano</th>
                         <th>ISBN</th>
+                        <th>Páginas</th>
+                        <th>Edição</th>
                         <th>Editoras</th>
                         <th>Coleção</th>
                         <th>Etiquetas</th>
-                        <th>Páginas</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,8 @@
                         </td>
                         <td th:text="${livro.ano}"></td>
                         <td th:text="${livro.isbn}"></td>
+                        <td th:text="${livro.paginas}"></td>
+                        <td th:text="${livro.edicao}"></td>
                         <td>
                             <span th:text="${livro.editoraPrincipal}"></span>
                             <span class="badge text-bg-secondary ml-2" th:text="'+' + ${livro.qtdOutrasEditoras}" th:if="${livro.qtdOutrasEditoras > 0}"></span>
@@ -39,7 +42,6 @@
                                 <span th:text="${etiqueta}"></span>
                             </div>
                         </td>
-                        <td th:text="${livro.paginas}"></td>
                     </tr>
                 </tbody>
             </table>
