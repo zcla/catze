@@ -1,6 +1,15 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{_fragments::head}"></head>
+    <script>
+        $(document).ready( function () {
+            $('table.datatable').DataTable(
+                {
+                    language: DATATABLE_LANGUAGE
+                }
+            );
+        });
+    </script>
     <body>
         <nav  th:replace="~{_fragments::nav}"></nav>
         <div class="container-fluid">
