@@ -15,12 +15,14 @@ import com.fasterxml.jackson.databind.DatabindException;
 import zcla71.catze.service.Service;
 import zcla71.catze.service.model.Colecao;
 import zcla71.catze.service.model.Editora;
+import zcla71.catze.service.model.Etiqueta;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.Obra;
 import zcla71.catze.service.model.Pessoa;
 import zcla71.catze.view.model.Stats;
 import zcla71.catze.view.model.Colecoes;
 import zcla71.catze.view.model.Editoras;
+import zcla71.catze.view.model.Etiquetas;
 import zcla71.catze.view.model.Livros;
 import zcla71.catze.view.model.Obras;
 import zcla71.catze.view.model.Pessoas;
@@ -33,6 +35,26 @@ public class CatZe {
             instance = new CatZe();
         }
         return instance;
+    }
+
+    public Collection<Colecoes> getColecoes() throws StreamReadException, DatabindException, IOException {
+        Service service = Service.getInstance();
+        Collection<Colecao> colecoes = service.listaColecoes();
+        List<Colecoes> result = new ArrayList<>();
+        for (Colecao colecao : colecoes) {
+            result.add(new Colecoes(colecao));
+        }
+
+        // Atualmente desnecessário, pois o DataTable já ordena
+        Collections.sort(result, new Comparator<Colecoes>() {
+            @Override
+            public int compare(Colecoes c1, Colecoes c2) {
+                Collator ptBrCollator = Collator.getInstance(Locale.forLanguageTag("pt-BR"));
+                return ptBrCollator.compare(c1.getNome(), c2.getNome());
+            }
+        });
+
+        return result;
     }
 
     public Collection<Editoras> getEditoras() throws StreamReadException, DatabindException, IOException {
@@ -55,25 +77,26 @@ public class CatZe {
         return result;
     }
 
-    public Collection<Colecoes> getColecoes() throws StreamReadException, DatabindException, IOException {
+    public Collection<Etiquetas> getEtiquetas() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
-        Collection<Colecao> colecoes = service.listaColecoes();
-        List<Colecoes> result = new ArrayList<>();
-        for (Colecao colecao : colecoes) {
-            result.add(new Colecoes(colecao));
+        Collection<Etiqueta> etiquetas = service.listaEtiquetas();
+        List<Etiquetas> result = new ArrayList<>();
+        for (Etiqueta etiqueta : etiquetas) {
+            result.add(new Etiquetas(etiqueta));
         }
 
         // Atualmente desnecessário, pois o DataTable já ordena
-        Collections.sort(result, new Comparator<Colecoes>() {
+        Collections.sort(result, new Comparator<Etiquetas>() {
             @Override
-            public int compare(Colecoes c1, Colecoes c2) {
+            public int compare(Etiquetas o1, Etiquetas o2) {
                 Collator ptBrCollator = Collator.getInstance(Locale.forLanguageTag("pt-BR"));
-                return ptBrCollator.compare(c1.getNome(), c2.getNome());
+                return ptBrCollator.compare(o1.getNome(), o2.getNome());
             }
         });
 
         return result;
     }
+
 
     public Collection<Livros> getLivros() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
