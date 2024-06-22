@@ -13,11 +13,13 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 
 import zcla71.catze.service.Service;
+import zcla71.catze.service.model.Colecao;
 import zcla71.catze.service.model.Editora;
 import zcla71.catze.service.model.Livro;
 import zcla71.catze.service.model.Obra;
 import zcla71.catze.service.model.Pessoa;
 import zcla71.catze.view.model.Stats;
+import zcla71.catze.view.model.Colecoes;
 import zcla71.catze.view.model.Editoras;
 import zcla71.catze.view.model.Livros;
 import zcla71.catze.view.model.Obras;
@@ -47,6 +49,26 @@ public class CatZe {
             public int compare(Editoras o1, Editoras o2) {
                 Collator ptBrCollator = Collator.getInstance(Locale.forLanguageTag("pt-BR"));
                 return ptBrCollator.compare(o1.getNome(), o2.getNome());
+            }
+        });
+
+        return result;
+    }
+
+    public Collection<Colecoes> getColecoes() throws StreamReadException, DatabindException, IOException {
+        Service service = Service.getInstance();
+        Collection<Colecao> colecoes = service.listaColecoes();
+        List<Colecoes> result = new ArrayList<>();
+        for (Colecao colecao : colecoes) {
+            result.add(new Colecoes(colecao));
+        }
+
+        // Atualmente desnecessário, pois o DataTable já ordena
+        Collections.sort(result, new Comparator<Colecoes>() {
+            @Override
+            public int compare(Colecoes c1, Colecoes c2) {
+                Collator ptBrCollator = Collator.getInstance(Locale.forLanguageTag("pt-BR"));
+                return ptBrCollator.compare(c1.getNome(), c2.getNome());
             }
         });
 
