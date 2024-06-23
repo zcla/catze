@@ -26,7 +26,7 @@ import zcla71.baudoze.service.model.Etiqueta;
 import zcla71.baudoze.service.model.Livro;
 import zcla71.baudoze.service.model.ObraLiteraria;
 import zcla71.baudoze.service.model.Pessoa;
-import zcla71.baudoze.service.model.Atividade.Tipo;
+import zcla71.baudoze.service.model.Atividade.AtividadeTipo;
 import zcla71.util.Utils;
 
 public class LibibImport {
@@ -154,13 +154,13 @@ public class LibibImport {
 
                         String added = line.getAdded().trim();
                         LocalDate ldAdded = LocalDate.parse(added, dateFormat);
-                        Atividade cadastro = new Atividade(Tipo.CADASTRO, ldAdded, livro.getId());
+                        Atividade cadastro = new Atividade(AtividadeTipo.CADASTRO, ldAdded, livro.getId());
                         repository.getData().getAtividades().add(cadastro);
 
                         String began = line.getBegan().trim();
                         if ((began != null) && (began.length() > 0)) {
                             LocalDate ldBegan = LocalDate.parse(began, dateFormat);
-                            Atividade inicioLeitura = new Atividade(Tipo.INICIO_LEITURA, ldBegan, livro.getId());
+                            Atividade inicioLeitura = new Atividade(AtividadeTipo.INICIO_LEITURA, ldBegan, livro.getId());
                             repository.getData().getAtividades().add(inicioLeitura);
                         }
 
@@ -170,7 +170,7 @@ public class LibibImport {
                             LocalDate ldCompleted = LocalDate.parse(completed, dateFormat);
                             switch (status) {
                                 case "Completed":
-                                    Atividade terminoLeitura = new Atividade(Tipo.TERMINO_LEITURA, ldCompleted, livro.getId());
+                                    Atividade terminoLeitura = new Atividade(AtividadeTipo.TERMINO_LEITURA, ldCompleted, livro.getId());
                                     repository.getData().getAtividades().add(terminoLeitura);
                                     break;
 

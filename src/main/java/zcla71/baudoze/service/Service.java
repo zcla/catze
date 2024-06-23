@@ -35,6 +35,19 @@ public class Service {
 
     // Atividades
 
+    public Atividade buscaUltimaAtividadeDoLivro(String idLivro) {
+        return this.listaAtividades().stream()
+                .filter(a -> a.getIdLivro().equals(idLivro)).sorted((a1, a2) -> {
+                    int result = a2.getData().compareTo(a1.getData());
+                    if (result == 0) {
+                        result = a2.getTipo().getOrdem().compareTo(a1.getTipo().getOrdem());
+                    }
+                    return result;
+                })
+                .findFirst()
+                .orElse(null);
+    }
+
     public Collection<Atividade> listaAtividades() {
         return this.repository.getData().getAtividades();
     }

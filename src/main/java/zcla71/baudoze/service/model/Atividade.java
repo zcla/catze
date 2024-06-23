@@ -11,20 +11,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Atividade {
-    public enum Tipo {
-        CADASTRO("Cadastro"),
-        INICIO_LEITURA("Início de leitura"),
-        TERMINO_LEITURA("Término de leitura");
+    public enum AtividadeTipo {
+        CADASTRO(1, "Cadastro", ""),
+        INICIO_LEITURA(2, "Início de leitura", "Lendo"),
+        TERMINO_LEITURA(3, "Término de leitura", "Lido");
 
         @Getter
+        private Integer ordem;
+        @Getter
         private String texto;
+        @Getter
+        private String status;
 
-        private Tipo(String texto) {
+        private AtividadeTipo(Integer ordem, String texto,String status) {
+            this.ordem = ordem;
             this.texto = texto;
+            this.status = status;
         }
     }
 
-    private Tipo tipo;
+    private AtividadeTipo tipo;
     private LocalDate data;
     private String idLivro;
 }
