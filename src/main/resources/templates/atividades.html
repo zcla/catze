@@ -3,12 +3,7 @@
     <head th:replace="~{_fragments::head}"></head>
     <script>
         $(document).ready( function () {
-            $('table.datatable').DataTable(
-                {
-                    language: DATATABLE_LANGUAGE,
-                    order: [0, 'desc']
-                }
-            );
+            $('table.datatable').DataTable(DATATABLE_COMMON_OPTIONS);
         });
     </script>
     <body>

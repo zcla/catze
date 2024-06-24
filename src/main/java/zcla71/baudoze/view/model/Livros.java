@@ -1,7 +1,6 @@
 package zcla71.baudoze.view.model;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
@@ -27,7 +26,7 @@ public class Livros {
     private Integer qtdOutrasEditoras;
     private Integer ano;
     private String colecao;
-    private Collection<String> etiquetas;
+    private String etiquetas;
     private Integer paginas;
     private String edicao;
     private String status;
@@ -72,9 +71,12 @@ public class Livros {
         }
 
         Collection<Etiqueta> etiquetas = service.listaEtiquetas().stream().filter(e -> livro.getIdsEtiquetas().contains(e.getId())).toList();
-        this.etiquetas = new ArrayList<>();
+        this.etiquetas = "";
         for (Etiqueta etiqueta : etiquetas) {
-            this.etiquetas.add(etiqueta.getNome());
+            this.etiquetas += etiqueta.getNome() + ", ";
+        }
+        if (this.etiquetas.length() > 0) {
+            this.etiquetas = this.etiquetas.substring(0, this.etiquetas.length() - 2);
         }
 
         this.paginas = livro.getPaginas();

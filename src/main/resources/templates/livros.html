@@ -3,17 +3,54 @@
     <head th:replace="~{_fragments::head}"></head>
     <script>
         $(document).ready( function () {
-            $('table.datatable').DataTable(
+            const options = DATATABLE_COMMON_OPTIONS;
+            options.columnDefs = [
                 {
-                    language: DATATABLE_LANGUAGE,
-                    columnDefs: [
-                        {
-                            targets: 6,
-                            className: 'dt-body-right'
-                        }
-                    ]
-                }
-            );
+                    targets: 0,
+                    className: "tableCellTruncate"
+                },
+                {
+                    targets: 1,
+                    className: "tableCellShowAll"
+                },
+                {
+                    targets: 2,
+                    className: "tableCellTruncate"
+                },
+                {
+                    targets: 3,
+                    className: "tableCellShowAll"
+                },
+                {
+                    targets: 4,
+                    className: "tableCellShowAll"
+                },
+                {
+                    targets: 5,
+                    className: "tableCellShowAll"
+                },
+                {
+                    targets: 6,
+                    className: "tableCellShowAll dt-body-right"
+                },
+                {
+                    targets: 7,
+                    className: "tableCellTruncate"
+                },
+                {
+                    targets: 8,
+                    className: "tableCellTruncate"
+                },
+                {
+                    targets: 9,
+                    className: "tableCellTruncate"
+                },
+                {
+                    targets: 10,
+                    className: "tableCellShowAll"
+                },
+            ];
+            $('table.datatable').DataTable(options);
         });
     </script>
     <body>
@@ -53,11 +90,7 @@
                             <span class="badge text-bg-secondary ml-2" th:text="'+' + ${livro.qtdOutrasEditoras}" th:if="${livro.qtdOutrasEditoras > 0}"></span>
                         </td>
                         <td th:text="${livro.colecao}"></td>
-                        <td>
-                            <div th:each="etiqueta:${livro.etiquetas}">
-                                <span th:text="${etiqueta}"></span>
-                            </div>
-                        </td>
+                        <td th:text="${livro.etiquetas}"></td>
                         <td th:text="${livro.status}"></td>
                     </tr>
                 </tbody>
