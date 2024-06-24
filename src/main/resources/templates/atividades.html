@@ -3,7 +3,9 @@
     <head th:replace="~{_fragments::head}"></head>
     <script>
         $(document).ready( function () {
-            $('table.datatable').DataTable(DATATABLE_COMMON_OPTIONS);
+            const options = DATATABLE_COMMON_OPTIONS;
+            options.order = [0, 'desc'];
+            $('table.datatable').DataTable(options);
         });
     </script>
     <body>
