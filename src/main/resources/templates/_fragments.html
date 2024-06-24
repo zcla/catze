@@ -265,10 +265,17 @@
                 [10, 20, 50, 'Todos']
             ]
         };
-
-        DataTable.intlOrder("pt-br");
+        $(document).ready(function(){
+            $("table.datatable").show();
+            $(".initialSpinner").hide();
+            DataTable.intlOrder("pt-br");
+        });
     </script>
     <style>
+        table.datatable {
+            display: none;
+        }
+
         .tableCellShowAll {
             width: 0;
             white-space: nowrap;

@@ -54,9 +54,10 @@
         });
     </script>
     <body>
-        <nav  th:replace="~{_fragments::nav}"></nav>
+        <nav th:replace="~{_fragments::nav}"></nav>
         <div class="container-fluid">
             <h1>Livros</h1>
+            <div class="initialSpinner spinner-border"></div>
             <table id="livros" class="table datatable table-sm table-striped table-hover">
                 <thead>
                     <tr>
