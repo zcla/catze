@@ -50,6 +50,10 @@ public class BauDoZeRepositoryData {
 
     // etiquetas
 
+    public Etiqueta buscaEtiquetaPorId(String id) {
+        return this.etiquetas.stream().filter(e -> e.getId().equals(id)).findFirst().orElse(null);
+    }
+
     public Etiqueta buscaEtiquetaPorNome(String nome) {
         return this.etiquetas.stream().filter(e -> e.getNome().equals(nome)).findFirst().orElse(null);
     }

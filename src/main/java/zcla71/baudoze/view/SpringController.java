@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -51,6 +52,13 @@ public class SpringController {
         BauDoZe bauDoZe = BauDoZe.getInstance();
         model.addAttribute("livros", bauDoZe.getLivros());
         return "livros";
+    }
+
+    @GetMapping("/livro/{id}")
+    public String livros(Model model, @PathVariable String id) throws StreamReadException, DatabindException, IOException {
+        BauDoZe bauDoZe = BauDoZe.getInstance();
+        model.addAttribute("livro", bauDoZe.getLivro(id));
+        return "livro";
     }
 
     @GetMapping("/obras")

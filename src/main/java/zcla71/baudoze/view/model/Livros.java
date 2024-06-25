@@ -17,6 +17,7 @@ import zcla71.baudoze.service.model.Pessoa;
 
 @Data
 public class Livros {
+    private String id;
     private String titulo;
     private Integer qtdObras;
     private String autorPrincipal;
@@ -34,6 +35,7 @@ public class Livros {
     public Livros(Livro livro) throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
 
+        this.id = livro.getId();
         this.titulo = livro.getTitulo();
         this.qtdObras = livro.getIdsObras().size();
 
@@ -80,9 +82,7 @@ public class Livros {
         }
 
         this.paginas = livro.getPaginas();
-
         this.edicao = livro.getEdicao();
-
         this.status = service.buscaUltimaAtividadeDoLivro(livro.getId()).getTipo().getStatus();
     }
 }

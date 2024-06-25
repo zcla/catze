@@ -76,7 +76,9 @@
                 </thead>
                 <tbody>
                     <tr th:each="livro:${livros}">
-                        <td th:text="${livro.titulo}"></td>
+                        <td>
+                            <a th:href="'/livro/' + ${livro.id}" th:text="${livro.titulo}"></a>
+                        </td>
                         <td th:text="${livro.qtdObras}"></td>
                         <td>
                             <span th:text="${livro.autorPrincipal}"></span>

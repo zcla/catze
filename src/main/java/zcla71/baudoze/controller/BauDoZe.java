@@ -21,6 +21,7 @@ import zcla71.baudoze.service.model.Livro;
 import zcla71.baudoze.service.model.Obra;
 import zcla71.baudoze.service.model.Pessoa;
 import zcla71.baudoze.view.model.Stats;
+import zcla71.baudoze.view.model.ViewLivro;
 import zcla71.baudoze.view.model.Atividades;
 import zcla71.baudoze.view.model.Colecoes;
 import zcla71.baudoze.view.model.Editoras;
@@ -118,6 +119,12 @@ public class BauDoZe {
         return result;
     }
 
+    public ViewLivro getLivro(String id) throws StreamReadException, DatabindException, IOException {
+        Service service = Service.getInstance();
+        Livro livro = service.buscaLivroPorId(id);
+        ViewLivro result = new ViewLivro(livro);
+        return result;
+    }
 
     public Collection<Livros> getLivros() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();

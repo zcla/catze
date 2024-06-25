@@ -1,0 +1,67 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{_fragments::head}"></head>
+    <body>
+        <nav th:replace="~{_fragments::nav}"></nav>
+        <div class="container-fluid">
+            <h1>Livro</h1>
+            <div class="initialSpinner spinner-border"></div>
+            <form>
+                <fieldset disabled>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">Título</label>
+                                <input type="text" class="form-control" id="titulo" th:value="${livro.titulo}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">Obras</label>
+                                <ul class="list-group" th:each="obra:${livro.obras}">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" th:value="${obra}">
+                                    </div>
+                                </ul>
+                            </div>
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">ISBN-13</label>
+                                <input type="text" class="form-control" id="isbn13" th:value="${livro.isbn13}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">ISBN-10</label>
+                                <input type="text" class="form-control" id="isbn10" th:value="${livro.isbn10}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">Editoras</label>
+                                <ul class="list-group" th:each="editora:${livro.editoras}">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" th:value="${editora}">
+                                    </div>
+                                </ul>
+                            </div>
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">Ano</label>
+                                <input type="text" class="form-control" id="ano" th:value="${livro.ano}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">Etiquetas</label>
+                                <ul class="list-group" th:each="etiqueta:${livro.etiquetas}">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" th:value="${etiqueta}">
+                                    </div>
+                                </ul>
+                            </div>
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">Páginas</label>
+                                <input type="text" class="form-control" id="paginas" th:value="${livro.paginas}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">Edição</label>
+                                <input type="text" class="form-control" id="edicao" th:value="${livro.edicao}">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>

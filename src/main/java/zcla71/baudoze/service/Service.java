@@ -74,6 +74,10 @@ public class Service {
 
     // Etiquetas
 
+    public Etiqueta buscaEtiquetaPorId(String id) {
+        return this.repository.getData().buscaEtiquetaPorId(id);
+    }
+
     public Collection<Etiqueta> listaEtiquetas() throws StreamReadException, DatabindException, IOException {
         return this.repository.getData().getEtiquetas();
     }
