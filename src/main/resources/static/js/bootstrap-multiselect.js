@@ -456,7 +456,10 @@
             buttonTextAlignment: 'center',
             enableResetButton: false,
             templates: {
+                // >>> https://github.com/davidstutz/bootstrap-multiselect/pull/1254/commits/c4e73e6f14f9da6ca07f3563b5cc383059c67e90
+                // button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
                 button: '<button type="button" class="form-select multiselect dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
+                // <<<
                 popupContainer: '<div class="multiselect-container dropdown-menu"></div>',
                 filter: '<div class="multiselect-filter d-flex align-items-center"><i class="fas fa-sm fa-search text-muted"></i><input type="search" class="multiselect-search form-control" /></div>',
                 buttonGroup: '<div class="multiselect-buttons btn-group" style="display:flex;"></div>',
@@ -519,13 +522,19 @@
             if (this.options.buttonTextAlignment) {
                 switch (this.options.buttonTextAlignment) {
                     case 'left':
-                        this.$button.addClass('text-left');
+                        // >>>
+                        // this.$button.addClass('text-left');
+                        this.$button.addClass('text-start');
+                        // <<<
                         break;
                     case 'center':
                         this.$button.addClass('text-center');
                         break;
                     case 'right':
-                        this.$button.addClass('text-right');
+                        // >>>
+                        // this.$button.addClass('text-right');
+                        this.$button.addClass('text-end');
+                        // <<<
                         break;
                 }
             }
