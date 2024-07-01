@@ -461,7 +461,10 @@
                 button: '<button type="button" class="form-select multiselect dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
                 // <<<
                 popupContainer: '<div class="multiselect-container dropdown-menu"></div>',
-                filter: '<div class="multiselect-filter d-flex align-items-center"><i class="fas fa-sm fa-search text-muted"></i><input type="search" class="multiselect-search form-control" /></div>',
+                // >>> Tirando o ícone de busca
+                // filter: '<div class="multiselect-filter d-flex align-items-center"><i class="fas fa-sm fa-search text-muted"></i><input type="search" class="multiselect-search form-control" /></div>',
+                filter: '<div class="multiselect-filter d-flex align-items-center"><input type="search" class="multiselect-search form-control" /></div>',
+                // <<<
                 buttonGroup: '<div class="multiselect-buttons btn-group" style="display:flex;"></div>',
                 buttonGroupReset: '<button type="button" class="multiselect-reset btn btn-secondary btn-block"></button>',
                 option: '<button type="button" class="multiselect-option dropdown-item"></button>',
@@ -522,7 +525,7 @@
             if (this.options.buttonTextAlignment) {
                 switch (this.options.buttonTextAlignment) {
                     case 'left':
-                        // >>>
+                        // >>> left -> start
                         // this.$button.addClass('text-left');
                         this.$button.addClass('text-start');
                         // <<<
@@ -531,7 +534,7 @@
                         this.$button.addClass('text-center');
                         break;
                     case 'right':
-                        // >>>
+                        // >>> right -> end
                         // this.$button.addClass('text-right');
                         this.$button.addClass('text-end');
                         // <<<
