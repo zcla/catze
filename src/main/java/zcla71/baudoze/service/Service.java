@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 
 import zcla71.baudoze.repository.Repository;
@@ -85,16 +86,20 @@ public class Service {
 
     // Livros
 
-    public void alteraLivro(Livro livro) throws RepositoryException {
+    public void alteraLivro(Livro livro) throws RepositoryException, StreamWriteException, DatabindException, IOException {
+        this.repository.beginTransaction();
         this.repository.getData().alteraLivro(livro);
+        this.repository.commitTransaction();
     }
 
     public Livro buscaLivroPorId(String id) {
         return this.repository.getData().buscaLivroPorId(id);
     }
 
-    public void incluiLivro(Livro livro) {
+    public void incluiLivro(Livro livro) throws StreamWriteException, DatabindException, IOException {
+        this.repository.beginTransaction();
         this.repository.getData().incluiLivro(livro);
+        this.repository.commitTransaction();
     }
 
     public Collection<Livro> listaLivros() throws StreamReadException, DatabindException, IOException {

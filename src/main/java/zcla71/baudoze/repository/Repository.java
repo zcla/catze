@@ -55,6 +55,7 @@ public class Repository<T> {
     }
 
     public void rollbackTransaction() throws StreamReadException, DatabindException, IOException {
+        // TODO Inócuo, já que permite alterar "por fora"; o próximo commitTransaction gravará o que deveria ter sofrido rollback.
         if (!this.inTransaction) {
             throw new RuntimeException("Não há transação iniciada");
         }

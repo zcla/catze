@@ -49,6 +49,7 @@ public class LivroController {
 
         LivroPagina livro = bauDoZe.getLivro(id);
         livro.setTitulo(form.getTitulo());
+        livro.setObras(form.getObras());
         if (livro.dadosValidos()) {
             bauDoZe.setLivro(livro);
             livro.setEstadoPagina(null);

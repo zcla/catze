@@ -34,6 +34,16 @@ public abstract class Pagina {
         this.mensagensDeErro.add(new MensagemDeErro(campo, mensagem));
     }
 
+    public boolean estaVazio(Collection<String> value) {
+        if (value == null) {
+            return true;
+        }
+        if (value.size() == 0) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean estaVazio(String value) {
         if (value == null) {
             return true;

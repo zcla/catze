@@ -3,6 +3,13 @@
     <head th:replace="~{_fragments::head}"></head>
     <script>
         $(document).ready(function(){
+            // Inicialização dos campos
+
+            $('#obras').multiselect({
+                buttonTextAlignment: 'left',
+                enableFiltering: true
+            });
+
             $('#ano').attr('max', new Date().getFullYear());
 
             $("#toolbarAlterar").on('click', function(event) {
@@ -56,15 +63,12 @@
                                     <input type="text" class="form-control" th:field="*{titulo}">
                                 </div>
                                 <div class="col">
-                                    <label for="titulo" class="form-label">Obras</label>
-                                    <ul class="list-group" th:each="livro_obra:${livro.obras}">
-                                        <div class="input-group">
-                                            <select class="form-select">
-                                                <option th:text="${livro_obra}"></option>
-                                                <option th:each="obra:${obras}" th:value="${obra.id}" th:text="${obra.nome}" th:selected="${obra.id==livro_obra}"></option>
-                                            </select>
-                                        </div>
-                                    </ul>
+                                    <label for="obras" class="form-label">Obras</label>
+                                    <div class="multiselect-fixer">
+                                        <select class="form-select" th:field="*{obras}" multiple="multiple">
+                                            <option th:each="obra:${obras}" th:value="${obra.id}" th:text="${obra.nome}" th:selected="${livro.obras.contains(obra.id)}"></option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">

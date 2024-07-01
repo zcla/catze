@@ -63,6 +63,11 @@ public class LivroPagina extends Pagina {
             result = false;
         }
 
+        if (estaVazio(obras)) {
+            adicionaMensagemDeErro("obras", "Informe ao menos uma obra");
+            result = false;
+        }
+
         return result;
     }
 
@@ -77,6 +82,7 @@ public class LivroPagina extends Pagina {
         }
 
         result.setTitulo(this.titulo);
+        result.setIdsObras(this.obras);
 
         return result;
     }
