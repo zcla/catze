@@ -44,7 +44,7 @@
         <div class="container-fluid">
             <h1>Livro</h1>
             <div class="initialSpinner spinner-border"></div>
-            <form th:method="put" th:action="@{/livro/__${livro.id}__}" th:object="${livro}">
+            <form class="initiallyHidden" th:method="put" th:action="@{/livro/__${livro.id}__}" th:object="${livro}">
                 <input type="hidden" th:field="*{estadoPagina}">
                 <fieldset id="toolbar">
                     <div class="row">

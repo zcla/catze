@@ -270,6 +270,7 @@
         $(document).ready(function(){
             $("table.datatable").show();
             $(".initialSpinner").hide();
+            $(".initiallyHidden").show();
             DataTable.intlOrder("pt-br");
         });
     </script>
@@ -292,6 +293,10 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+        }
+
+        .initiallyHidden {
+            display: none;
         }
 
         .multiselect-fixer {
