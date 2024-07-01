@@ -428,7 +428,10 @@
             selectAllNumber: true,
             selectAllJustVisible: true,
             enableFiltering: false,
-            enableCaseInsensitiveFiltering: false,
+            // >>> enableCaseInsensitiveFiltering = true by default
+            // enableCaseInsensitiveFiltering: false,
+            enableCaseInsensitiveFiltering: true,
+            // <<<
             enableFullValueFiltering: false,
             enableClickableOptGroups: false,
             enableCollapsibleOptGroups: false,
