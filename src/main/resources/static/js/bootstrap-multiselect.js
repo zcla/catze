@@ -432,6 +432,9 @@
             // enableCaseInsensitiveFiltering: false,
             enableCaseInsensitiveFiltering: true,
             // <<<
+            // >>> https://github.com/davidstutz/bootstrap-multiselect/pull/1249/commits/f8300168a6188ab53c0723d3a1eb8813ceb46bf3
+            enableAccentInsensitiveFiltering: true,
+            // <<<
             enableFullValueFiltering: false,
             enableClickableOptGroups: false,
             enableCollapsibleOptGroups: false,
@@ -1286,6 +1289,13 @@
                                             filterCandidate = filterCandidate.toLowerCase();
                                             this.query = this.query.toLowerCase();
                                         }
+
+                                        // >>> https://github.com/davidstutz/bootstrap-multiselect/pull/1249/commits/f8300168a6188ab53c0723d3a1eb8813ceb46bf3 + https://stackoverflow.com/questions/5700636/using-javascript-to-perform-text-matches-with-without-accented-characters#51874002
+                                        if (this.options.enableAccentInsensitiveFiltering) {
+                                            filterCandidate = filterCandidate.normalize("NFD").replace(/\p{Diacritic}/gu, '');
+                                            this.query = this.query.normalize("NFD").replace(/\p{Diacritic}/gu, '');
+                                        }
+                                        // <<<
 
                                         if (this.options.enableFullValueFiltering && this.options.filterBehavior !== 'both') {
                                             var valueToMatch = filterCandidate.trim().substring(0, this.query.length);
