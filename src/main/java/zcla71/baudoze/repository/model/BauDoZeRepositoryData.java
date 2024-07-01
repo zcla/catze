@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import lombok.Data;
+import zcla71.baudoze.repository.Repository;
 import zcla71.baudoze.service.model.Atividade;
 import zcla71.baudoze.service.model.Colecao;
 import zcla71.baudoze.service.model.Editora;
@@ -14,7 +15,7 @@ import zcla71.baudoze.service.model.Pessoa;
 
 @Data
 public class BauDoZeRepositoryData {
-    private Collection<Livro> livros;
+    private ArrayList<Livro> livros;
     private Collection<Obra> obras;
     private Collection<Pessoa> pessoas;
     private Collection<Editora> editoras;
@@ -60,8 +61,20 @@ public class BauDoZeRepositoryData {
 
     // livros
 
+    public void alteraLivro(Livro livro) throws RepositoryException {
+        if (buscaLivroPorId(livro.getId()) == null) {
+            throw new RepositoryException("Tentativa de alterar um livro que não existe");
+        }
+        this.livros.replaceAll(l -> l.getId().equals(livro.getId()) ? livro : l);
+    }
+
     public Livro buscaLivroPorId(String id) {
         return this.livros.stream().filter(l -> l.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    public void incluiLivro(Livro livro) {
+        livro.setId(Repository.generateId());
+        this.livros.add(livro);
     }
 
     // pessoas

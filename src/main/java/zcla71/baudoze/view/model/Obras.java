@@ -14,6 +14,7 @@ import zcla71.baudoze.service.model.Pessoa;
 @Data
 @AllArgsConstructor
 public class Obras {
+    private String id;
     private String titulo;
     private String autorPrincipal;
     private Integer qtdOutrosAutores;
@@ -22,6 +23,7 @@ public class Obras {
     public Obras(Obra obra) throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
 
+        this.id = obra.getId();
         this.titulo = obra.getTitulo();
 
         this.autorPrincipal = null;

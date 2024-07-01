@@ -3,6 +3,7 @@ package zcla71.baudoze.repository;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.UUID;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
@@ -13,6 +14,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Getter;
 
 public class Repository<T> {
+    public static String generateId() {
+        return UUID.randomUUID().toString();
+    }
+
     private String fileLocation;
     private Boolean inTransaction;
     private Class<T> classe;

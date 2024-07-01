@@ -1,63 +1,120 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{_fragments::head}"></head>
+    <script>
+        $(document).ready(function(){
+            $('#ano').attr('max', new Date().getFullYear());
+
+            $("#toolbarAlterar").on('click', function(event) {
+                $('#toolbar').attr('disabled', true);
+                $('#fields').removeAttr('disabled');
+                $('#actions').removeClass('d-none');
+            });
+
+            // TODO toolbarExcluir
+
+            $("#actionSalvar").on('click', function(event) {
+                // TODO limpar erros
+                // TODO spinner
+                // TODO chamada ajax
+                //   TODO ok -> reload
+                //   TODO erro -> mostrar erros
+            });
+
+            $("#actionCancelar").on('click', function(event) {
+                $('#fields').attr('disabled', true);
+                $('#actions').addClass('d-none');
+                window.location.reload();
+            });
+
+            if ($('#pageState').val() == 'UPDATE') {
+                $("#toolbarAlterar").click();
+            }
+        });
+    </script>
     <body>
         <nav th:replace="~{_fragments::nav}"></nav>
         <div class="container-fluid">
             <h1>Livro</h1>
             <div class="initialSpinner spinner-border"></div>
-            <form>
-                <fieldset disabled>
+            <form th:method="put" th:action="@{/livro/__${livro.id}__}" th:object="${livro}">
+                <input type="hidden" th:field="*{estadoPagina}">
+                <fieldset id="toolbar">
                     <div class="row">
                         <div class="col">
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Título</label>
-                                <input type="text" class="form-control" id="titulo" th:value="${livro.titulo}">
+                            <button id="toolbarAlterar" type="button" class="btn btn-primary">✏️ Alterar</button>
+                            <button id="toolbarExcluir" type="button" class="btn btn-danger" disabled>🗑 Excluir</button>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset id="fields" disabled>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="titulo" class="form-label">Título</label>
+                                    <input type="text" class="form-control" th:field="*{titulo}">
+                                </div>
+                                <div class="col">
+                                    <label for="titulo" class="form-label">Obras</label>
+                                    <ul class="list-group" th:each="livro_obra:${livro.obras}">
+                                        <div class="input-group">
+                                            <select class="form-select">
+                                                <option th:text="${livro_obra}"></option>
+                                                <option th:each="obra:${obras}" th:value="${obra.id}" th:text="${obra.nome}" th:selected="${obra.id==livro_obra}"></option>
+                                            </select>
+                                        </div>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Obras</label>
-                                <ul class="list-group" th:each="obra:${livro.obras}">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" th:value="${obra}">
-                                    </div>
-                                </ul>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="titulo" class="form-label">ISBN-13</label>
+                                    <input type="text" class="form-control text-end" id="isbn13" th:value="${livro.isbn13}">
+                                </div>
+                                <div class="col">
+                                    <label for="titulo" class="form-label">ISBN-10</label>
+                                    <input type="text" class="form-control text-end" id="isbn10" th:value="${livro.isbn10}">
+                                </div>
+                                <div class="col">
+                                    <label for="titulo" class="form-label">Ano</label>
+                                    <input type="number" class="form-control text-end" id="ano" th:value="${livro.ano}">
+                                </div>
+                                <div class="col">
+                                    <label for="titulo" class="form-label">Páginas</label>
+                                    <input type="number" class="form-control text-end" id="paginas" min="1" th:value="${livro.paginas}">
+                                </div>
+                                <div class="col">
+                                    <label for="titulo" class="form-label">Edição</label>
+                                    <input type="text" class="form-control text-end" id="edicao" th:value="${livro.edicao}">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">ISBN-13</label>
-                                <input type="text" class="form-control" id="isbn13" th:value="${livro.isbn13}">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="titulo" class="form-label">Editoras</label>
+                                    <ul class="list-group" th:each="editora:${livro.editoras}">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" th:value="${editora}">
+                                        </div>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <label for="titulo" class="form-label">Etiquetas</label>
+                                    <ul class="list-group" th:each="etiqueta:${livro.etiquetas}">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" th:value="${etiqueta}">
+                                        </div>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">ISBN-10</label>
-                                <input type="text" class="form-control" id="isbn10" th:value="${livro.isbn10}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Editoras</label>
-                                <ul class="list-group" th:each="editora:${livro.editoras}">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" th:value="${editora}">
-                                    </div>
-                                </ul>
-                            </div>
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Ano</label>
-                                <input type="text" class="form-control" id="ano" th:value="${livro.ano}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Etiquetas</label>
-                                <ul class="list-group" th:each="etiqueta:${livro.etiquetas}">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" th:value="${etiqueta}">
-                                    </div>
-                                </ul>
-                            </div>
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Páginas</label>
-                                <input type="text" class="form-control" id="paginas" th:value="${livro.paginas}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="titulo" class="form-label">Edição</label>
-                                <input type="text" class="form-control" id="edicao" th:value="${livro.edicao}">
-                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset id="actions" class="d-none">
+                    <div class="row">
+                        <div class="col">
+                            <button id="actionSalvar" type="submit" class="btn btn-success">✅ Salvar</button>
+                            <button id="actionCancelar" type="button" class="btn btn-secondary">❌ Cancelar</button>
                         </div>
                     </div>
                 </fieldset>

@@ -20,14 +20,13 @@ import zcla71.baudoze.batch.model.Notes;
 import zcla71.baudoze.repository.Repository;
 import zcla71.baudoze.repository.model.BauDoZeRepositoryData;
 import zcla71.baudoze.service.model.Atividade;
+import zcla71.baudoze.service.model.Atividade.AtividadeTipo;
 import zcla71.baudoze.service.model.Colecao;
 import zcla71.baudoze.service.model.Editora;
 import zcla71.baudoze.service.model.Etiqueta;
 import zcla71.baudoze.service.model.Livro;
 import zcla71.baudoze.service.model.ObraLiteraria;
 import zcla71.baudoze.service.model.Pessoa;
-import zcla71.baudoze.service.model.Atividade.AtividadeTipo;
-import zcla71.util.Utils;
 
 public class LibibImport {
     private static final String JSON_FILE_LOCATION = "data/baudoze.json"; // TODO Jogar pro application.properties
@@ -77,7 +76,7 @@ public class LibibImport {
                         }
 
                         ObraLiteraria obra = new ObraLiteraria();
-                        obra.setId(Utils.generateId());
+                        obra.setId(Repository.generateId());
                         obra.setTitulo(line.getTitle());
                         String[] autores = line.getCreators().split(",");
                         obra.setIdsAutores(new ArrayList<>());
@@ -85,7 +84,7 @@ public class LibibImport {
                             Pessoa pessoa = repository.getData().getPessoas().stream().filter(p -> p.getNome().equals(autor)).findFirst().orElse(null);
                             if (pessoa == null) {
                                 pessoa = new Pessoa();
-                                pessoa.setId(Utils.generateId());
+                                pessoa.setId(Repository.generateId());
                                 pessoa.setNome(autor);
                                 repository.getData().getPessoas().add(pessoa);
                             }
@@ -94,7 +93,7 @@ public class LibibImport {
                         repository.getData().getObras().add(obra);
 
                         Livro livro = new Livro();
-                        livro.setId(Utils.generateId());
+                        livro.setId(Repository.generateId());
                         livro.setTitulo(line.getTitle());
                         livro.setIdsObras(new ArrayList<>());
                         livro.getIdsObras().add(obra.getId());
@@ -111,7 +110,7 @@ public class LibibImport {
                                 Editora editora = repository.getData().buscaEditoraPorNome(nomeEditora);
                                 if (editora == null) {
                                     editora = new Editora();
-                                    editora.setId(Utils.generateId());
+                                    editora.setId(Repository.generateId());
                                     editora.setNome(nomeEditora);
                                     repository.getData().getEditoras().add(editora);
                                 }
@@ -127,7 +126,7 @@ public class LibibImport {
                             Colecao colecao = repository.getData().buscaColecaoPorNome(line.getGroup());
                             if (colecao == null) {
                                 colecao = new Colecao();
-                                colecao.setId(Utils.generateId());
+                                colecao.setId(Repository.generateId());
                                 colecao.setNome(line.getGroup());
                                 colecao.setIdsLivros(new ArrayList<>());
                                 repository.getData().getColecoes().add(colecao);
@@ -142,7 +141,7 @@ public class LibibImport {
                                 Etiqueta etiqueta = repository.getData().buscaEtiquetaPorNome(tag);
                                 if (etiqueta == null) {
                                     etiqueta = new Etiqueta();
-                                    etiqueta.setId(Utils.generateId());
+                                    etiqueta.setId(Repository.generateId());
                                     etiqueta.setNome(tag);
                                     repository.getData().getEtiquetas().add(etiqueta);
                                 }

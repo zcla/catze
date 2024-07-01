@@ -12,6 +12,7 @@ import java.util.Locale;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 
+import zcla71.baudoze.repository.model.RepositoryException;
 import zcla71.baudoze.service.Service;
 import zcla71.baudoze.service.model.Atividade;
 import zcla71.baudoze.service.model.Colecao;
@@ -20,8 +21,7 @@ import zcla71.baudoze.service.model.Etiqueta;
 import zcla71.baudoze.service.model.Livro;
 import zcla71.baudoze.service.model.Obra;
 import zcla71.baudoze.service.model.Pessoa;
-import zcla71.baudoze.view.model.Stats;
-import zcla71.baudoze.view.model.ViewLivro;
+import zcla71.baudoze.view.livro.LivroPagina;
 import zcla71.baudoze.view.model.Atividades;
 import zcla71.baudoze.view.model.Colecoes;
 import zcla71.baudoze.view.model.Editoras;
@@ -29,6 +29,7 @@ import zcla71.baudoze.view.model.Etiquetas;
 import zcla71.baudoze.view.model.Livros;
 import zcla71.baudoze.view.model.Obras;
 import zcla71.baudoze.view.model.Pessoas;
+import zcla71.baudoze.view.model.Stats;
 
 public class BauDoZe {
     private static BauDoZe instance;
@@ -39,6 +40,8 @@ public class BauDoZe {
         }
         return instance;
     }
+
+    // atividades
 
     public Collection<Atividades> getAtividades() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
@@ -58,6 +61,8 @@ public class BauDoZe {
 
         return result;
     }
+
+    // colecoes
 
     public Collection<Colecoes> getColecoes() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
@@ -79,6 +84,8 @@ public class BauDoZe {
         return result;
     }
 
+    // editoras
+
     public Collection<Editoras> getEditoras() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
         Collection<Editora> editoras = service.listaEditoras();
@@ -98,6 +105,8 @@ public class BauDoZe {
 
         return result;
     }
+
+    // etiquetas
 
     public Collection<Etiquetas> getEtiquetas() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
@@ -119,11 +128,23 @@ public class BauDoZe {
         return result;
     }
 
-    public ViewLivro getLivro(String id) throws StreamReadException, DatabindException, IOException {
+    // livros
+
+    public LivroPagina getLivro(String id) throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
         Livro livro = service.buscaLivroPorId(id);
-        ViewLivro result = new ViewLivro(livro);
+        LivroPagina result = new LivroPagina(livro);
         return result;
+    }
+
+    public void setLivro(LivroPagina livroPagina) throws StreamReadException, DatabindException, IOException, RepositoryException {
+        Service service = Service.getInstance();
+        Livro livro = livroPagina.toLivro();
+        if (livro.getId() == null) {
+            service.incluiLivro(livro);
+        } else {
+            service.alteraLivro(livro);
+        }
     }
 
     public Collection<Livros> getLivros() throws StreamReadException, DatabindException, IOException {
@@ -146,6 +167,8 @@ public class BauDoZe {
         return result;
     }
 
+    // obras
+
     public Collection<Obras> getObras() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
         Collection<Obra> obras = service.listaObras();
@@ -166,6 +189,8 @@ public class BauDoZe {
         return result;
     }
 
+    // pessoas
+
     public Collection<Pessoas> getPessoas() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
         Collection<Pessoa> pessoas = service.listaPessoas();
@@ -185,6 +210,8 @@ public class BauDoZe {
 
         return result;
     }
+
+    // stats
 
     public Stats getStats() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();

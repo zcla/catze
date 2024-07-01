@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DatabindException;
 
 import zcla71.baudoze.repository.Repository;
 import zcla71.baudoze.repository.model.BauDoZeRepositoryData;
+import zcla71.baudoze.repository.model.RepositoryException;
 import zcla71.baudoze.service.model.Atividade;
 import zcla71.baudoze.service.model.Colecao;
 import zcla71.baudoze.service.model.Editora;
@@ -84,8 +85,16 @@ public class Service {
 
     // Livros
 
+    public void alteraLivro(Livro livro) throws RepositoryException {
+        this.repository.getData().alteraLivro(livro);
+    }
+
     public Livro buscaLivroPorId(String id) {
         return this.repository.getData().buscaLivroPorId(id);
+    }
+
+    public void incluiLivro(Livro livro) {
+        this.repository.getData().incluiLivro(livro);
     }
 
     public Collection<Livro> listaLivros() throws StreamReadException, DatabindException, IOException {

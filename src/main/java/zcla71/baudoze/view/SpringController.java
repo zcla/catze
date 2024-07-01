@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -13,70 +12,80 @@ import com.fasterxml.jackson.databind.DatabindException;
 import zcla71.baudoze.controller.BauDoZe;
 
 @Controller
+// TODO Criar controllers específicos, um para cada página, e juntar a eles os objetos Page (hoje dentro de model)
 public class SpringController {
     @GetMapping("/")
     public String index(Model model) throws StreamReadException, DatabindException, IOException {
-        return stats(model);
+        return statsGet(model);
     }
 
+    // atividades
+
     @GetMapping("/atividades")
-    public String atividades(Model model) throws StreamReadException, DatabindException, IOException {
+    public String atividadesGet(Model model) throws StreamReadException, DatabindException, IOException {
         BauDoZe bauDoZe = BauDoZe.getInstance();
         model.addAttribute("atividades", bauDoZe.getAtividades());
         return "atividades";
     }
 
+    // colecoes
+
     @GetMapping("/colecoes")
-    public String colecoes(Model model) throws StreamReadException, DatabindException, IOException {
+    public String colecoesGet(Model model) throws StreamReadException, DatabindException, IOException {
         BauDoZe bauDoZe = BauDoZe.getInstance();
         model.addAttribute("colecoes", bauDoZe.getColecoes());
         return "colecoes";
     }
 
+    // editoras
+
     @GetMapping("/editoras")
-    public String editoras(Model model) throws StreamReadException, DatabindException, IOException {
+    public String editorasGet(Model model) throws StreamReadException, DatabindException, IOException {
         BauDoZe bauDoZe = BauDoZe.getInstance();
         model.addAttribute("editoras", bauDoZe.getEditoras());
         return "editoras";
     }
 
+    // etiquetas
+
     @GetMapping("/etiquetas")
-    public String etiquetas(Model model) throws StreamReadException, DatabindException, IOException {
+    public String etiquetasGet(Model model) throws StreamReadException, DatabindException, IOException {
         BauDoZe bauDoZe = BauDoZe.getInstance();
         model.addAttribute("etiquetas", bauDoZe.getEtiquetas());
         return "etiquetas";
     }
 
+    // livros
+
     @GetMapping("/livros")
-    public String livros(Model model) throws StreamReadException, DatabindException, IOException {
+    public String livrosGet(Model model) throws StreamReadException, DatabindException, IOException {
         BauDoZe bauDoZe = BauDoZe.getInstance();
         model.addAttribute("livros", bauDoZe.getLivros());
         return "livros";
     }
 
-    @GetMapping("/livro/{id}")
-    public String livros(Model model, @PathVariable String id) throws StreamReadException, DatabindException, IOException {
-        BauDoZe bauDoZe = BauDoZe.getInstance();
-        model.addAttribute("livro", bauDoZe.getLivro(id));
-        return "livro";
-    }
+    // obras
 
     @GetMapping("/obras")
-    public String obras(Model model) throws StreamReadException, DatabindException, IOException {
+    public String obrasGet(Model model) throws StreamReadException, DatabindException, IOException {
         BauDoZe bauDoZe = BauDoZe.getInstance();
         model.addAttribute("obras", bauDoZe.getObras());
         return "obras";
     }
 
-    @GetMapping("/pessoas")
+    // pessoas
+
+    @GetMapping("/pessoasGet")
     public String pessoas(Model model) throws StreamReadException, DatabindException, IOException {
         BauDoZe bauDoZe = BauDoZe.getInstance();
         model.addAttribute("pessoas", bauDoZe.getPessoas());
         return "pessoas";
     }
 
+    // stats
+
     @GetMapping("/stats")
-    public String stats(Model model) throws StreamReadException, DatabindException, IOException {
+    public String statsGet(Model model) throws StreamReadException, DatabindException, IOException {
         BauDoZe bauDoZe = BauDoZe.getInstance();
         model.addAttribute("stats", bauDoZe.getStats());
         return "stats";
