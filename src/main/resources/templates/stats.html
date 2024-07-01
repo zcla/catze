@@ -89,122 +89,124 @@
         <div id="stats" class="container-fluid">
             <h1>Números</h1>
             <div class="initialSpinner spinner-border"></div>
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Obras</h5>
+            <div class="initiallyHidden">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Obras</h5>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-text text-center" th:text="${stats.obras}"></h1>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h1 class="card-text text-center" th:text="${stats.obras}"></h1>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Livros</h5>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-text text-center" th:text="${stats.livros}"></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Pessoas</h5>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-text text-center" th:text="${stats.pessoas}"></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Editoras</h5>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-text text-center" th:text="${stats.editoras}"></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Coleções</h5>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-text text-center" th:text="${stats.colecoes}"></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Etiquetas</h5>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-text text-center" th:text="${stats.etiquetas}"></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Atividades</h5>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-text text-center" th:text="${stats.atividades}"></h1>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Livros</h5>
+                <!--
+                <div class="row">
+                    <div class="col col-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Gráfico</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="grafPie"></canvas>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h1 class="card-text text-center" th:text="${stats.livros}"></h1>
+                    </div>
+                    <div class="col col-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Gráfico</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="grafBar"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Gráfico</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="grafDoughnut"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center">Gráfico</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="grafLine"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Pessoas</h5>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-text text-center" th:text="${stats.pessoas}"></h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Editoras</h5>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-text text-center" th:text="${stats.editoras}"></h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Coleções</h5>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-text text-center" th:text="${stats.colecoes}"></h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Etiquetas</h5>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-text text-center" th:text="${stats.etiquetas}"></h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Atividades</h5>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-text text-center" th:text="${stats.atividades}"></h1>
-                        </div>
-                    </div>
-                </div>
+                -->
             </div>
-            <!--
-            <div class="row">
-                <div class="col col-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Gráfico</h5>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="grafPie"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Gráfico</h5>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="grafBar"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Gráfico</h5>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="grafDoughnut"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="text-center">Gráfico</h5>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="grafLine"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        -->
         </div>
     </body>
 </html>
