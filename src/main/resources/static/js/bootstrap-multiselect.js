@@ -433,22 +433,34 @@
             enableClickableOptGroups: false,
             enableCollapsibleOptGroups: false,
             collapseOptGroupsByDefault: false,
-            filterPlaceholder: 'Search',
+            // >>> pt-br
+            // filterPlaceholder: 'Search',
+            filterPlaceholder: 'Busca',
+            // <<<
             // possible options: 'text', 'value', 'both'
             filterBehavior: 'text',
             includeFilterClearBtn: true,
             preventInputChangeEvent: false,
-            nonSelectedText: 'None selected',
-            nSelectedText: 'selected',
-            allSelectedText: 'All selected',
-            resetButtonText: 'Reset',
+            // >>> pt-br
+            // nonSelectedText: 'None selected',
+            // nSelectedText: 'selected',
+            // allSelectedText: 'All selected',
+            // resetButtonText: 'Reset',
+            nonSelectedText: 'Nenhum selecionado',
+            nSelectedText: 'selecionados',
+            allSelectedText: 'Todos selecionados',
+            resetButtonText: 'Limpar',
+            // <<<
             numberDisplayed: 3,
             disableIfEmpty: false,
             disabledText: '',
             delimiterText: ', ',
             includeResetOption: false,
             includeResetDivider: false,
-            resetText: 'Reset',
+            // >>> pt-br
+            // resetText: 'Reset',
+            resetText: 'Limpar',
+            // <<<
             indentGroupOptions: true,
             // possible options: 'never', 'always', 'ifPopupIsSmaller', 'ifPopupIsWider'
             widthSynchronizationMode: 'never',
