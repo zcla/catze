@@ -80,7 +80,9 @@ span.multiselect-native-select select {
   border: none;
   border-bottom: 1px solid lightgrey;
   padding-left: 2rem;
+  /* >>> Consequência da retirada do ícone
   margin-left: -1.625rem;
+  <<< */
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
