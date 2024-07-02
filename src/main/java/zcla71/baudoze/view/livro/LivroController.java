@@ -17,16 +17,16 @@ import com.fasterxml.jackson.databind.DatabindException;
 import zcla71.baudoze.controller.BauDoZe;
 import zcla71.baudoze.repository.model.RepositoryException;
 import zcla71.baudoze.view.Pagina.Estado;
-import zcla71.baudoze.view.model.Obras;
+import zcla71.baudoze.view.obras.ObrasPaginaObra;
 
 @Controller
 public class LivroController {
     private String livroSetModel(Model model, BauDoZe bauDoZe, LivroPagina livro) throws StreamReadException, DatabindException, IOException {
         model.addAttribute("livro", livro);
 
-        Collection<Obras> obras = bauDoZe.getObras();
+        Collection<ObrasPaginaObra> obras = bauDoZe.getObras();
         Collection<LivroPaginaObra> lpObras = new ArrayList<>();
-        for (Obras obra : obras) {
+        for (ObrasPaginaObra obra : obras) {
             lpObras.add(new LivroPaginaObra(obra));
         }
         model.addAttribute("obras", lpObras);

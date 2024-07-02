@@ -55,15 +55,6 @@ public class SpringController {
         return "etiquetas";
     }
 
-    // obras
-
-    @GetMapping("/obras")
-    public String obrasGet(Model model) throws StreamReadException, DatabindException, IOException {
-        BauDoZe bauDoZe = BauDoZe.getInstance();
-        model.addAttribute("obras", bauDoZe.getObras());
-        return "obras";
-    }
-
     // pessoas
 
     @GetMapping("/pessoas")

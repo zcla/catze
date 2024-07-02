@@ -28,9 +28,10 @@ import zcla71.baudoze.view.model.Atividades;
 import zcla71.baudoze.view.model.Colecoes;
 import zcla71.baudoze.view.model.Editoras;
 import zcla71.baudoze.view.model.Etiquetas;
-import zcla71.baudoze.view.model.Obras;
 import zcla71.baudoze.view.model.Pessoas;
 import zcla71.baudoze.view.model.Stats;
+import zcla71.baudoze.view.obras.ObrasPagina;
+import zcla71.baudoze.view.obras.ObrasPaginaObra;
 
 public class BauDoZe {
     private static BauDoZe instance;
@@ -170,22 +171,41 @@ public class BauDoZe {
 
     // obras
 
-    public Collection<Obras> getObras() throws StreamReadException, DatabindException, IOException {
+    public ObrasPagina getObras() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
+
         Collection<Obra> obras = service.listaObras();
-        List<Obras> result = new ArrayList<>();
+        ObrasPagina result = new ObrasPagina();
         for (Obra obra : obras) {
-            result.add(new Obras(obra));
+            ObrasPaginaObra opObra = new ObrasPaginaObra();
+
+            opObra.setId(obra.getId());
+            opObra.setTitulo(obra.getTitulo());
+
+            opObra.setAutorPrincipal(null);
+            opObra.setQtdOutrosAutores(0);
+            for (String idPessoa : obra.getIdsAutores()) {
+                Pessoa autor = service.buscaPessoaPorId(idPessoa);
+                if (opObra.getAutorPrincipal() == null) {
+                    opObra.setAutorPrincipal(autor.getNome());
+                } else {
+                    opObra.setQtdOutrosAutores(opObra.getQtdOutrosAutores() + 1);
+                }
+            }
+    
+            opObra.setQtdLivros(service.listaLivrosDaObra(obra.getId()).size());
+    
+            result.add(opObra);
         }
 
-        // Atualmente desnecessário, pois o DataTable já ordena
-        Collections.sort(result, new Comparator<Obras>() {
-            @Override
-            public int compare(Obras o1, Obras o2) {
-                Collator ptBrCollator = Collator.getInstance(Locale.forLanguageTag("pt-BR"));
-                return ptBrCollator.compare(o1.getTitulo(), o2.getTitulo());
-            }
-        });
+        // // Atualmente desnecessário, pois o DataTable já ordena
+        // Collections.sort(result, new Comparator<Obras>() {
+        //     @Override
+        //     public int compare(Obras o1, Obras o2) {
+        //         Collator ptBrCollator = Collator.getInstance(Locale.forLanguageTag("pt-BR"));
+        //         return ptBrCollator.compare(o1.getTitulo(), o2.getTitulo());
+        //     }
+        // });
 
         return result;
     }
