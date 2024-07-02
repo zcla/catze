@@ -28,10 +28,11 @@ import zcla71.baudoze.view.model.Atividades;
 import zcla71.baudoze.view.model.Colecoes;
 import zcla71.baudoze.view.model.Editoras;
 import zcla71.baudoze.view.model.Etiquetas;
-import zcla71.baudoze.view.model.Pessoas;
 import zcla71.baudoze.view.model.Stats;
 import zcla71.baudoze.view.obras.ObrasPagina;
 import zcla71.baudoze.view.obras.ObrasPaginaObra;
+import zcla71.baudoze.view.pessoas.PessoasPagina;
+import zcla71.baudoze.view.pessoas.PessoasPaginaPessoa;
 
 public class BauDoZe {
     private static BauDoZe instance;
@@ -265,22 +266,35 @@ public class BauDoZe {
 
     // pessoas
 
-    public Collection<Pessoas> getPessoas() throws StreamReadException, DatabindException, IOException {
+    public PessoasPagina getPessoas() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
         Collection<Pessoa> pessoas = service.listaPessoas();
-        List<Pessoas> result = new ArrayList<>();
+        PessoasPagina result = new PessoasPagina();
         for (Pessoa pessoa : pessoas) {
-            result.add(new Pessoas(pessoa));
+            PessoasPaginaPessoa ppPessoa = new PessoasPaginaPessoa();
+
+            ppPessoa.setNome(pessoa.getNome());
+
+            Collection<Obra> obrasAutor = service.listaObras().stream().filter(o -> o.getIdsAutores().contains(pessoa.getId())).toList();
+            ppPessoa.setQtdObras(obrasAutor.size());
+
+            Collection<Livro> livros = service.listaLivros();
+            ppPessoa.setQtdLivros(0);
+            for (Livro livro : livros) {
+                ppPessoa.setQtdLivros(ppPessoa.getQtdLivros() + obrasAutor.stream().filter(o -> livro.getIdsObras().contains(o.getId()) && o.getIdsAutores().contains(pessoa.getId())).toArray().length);
+            }
+
+            result.add(ppPessoa);
         }
 
-        // Atualmente desnecessário, pois o DataTable já ordena
-        Collections.sort(result, new Comparator<Pessoas>() {
-            @Override
-            public int compare(Pessoas p1, Pessoas p2) {
-                Collator ptBrCollator = Collator.getInstance(Locale.forLanguageTag("pt-BR"));
-                return ptBrCollator.compare(p1.getNome(), p2.getNome());
-            }
-        });
+        // // Atualmente desnecessário, pois o DataTable já ordena
+        // Collections.sort(result, new Comparator<PessoasPaginaPessoa>() {
+        //     @Override
+        //     public int compare(PessoasPaginaPessoa p1, PessoasPaginaPessoa p2) {
+        //         Collator ptBrCollator = Collator.getInstance(Locale.forLanguageTag("pt-BR"));
+        //         return ptBrCollator.compare(p1.getNome(), p2.getNome());
+        //     }
+        // });
 
         return result;
     }
