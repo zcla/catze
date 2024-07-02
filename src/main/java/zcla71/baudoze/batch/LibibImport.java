@@ -138,6 +138,7 @@ public class LibibImport {
                         if ((line.getTags() != null) && (line.getTags().length() > 0)) {
                             String[] tags = line.getTags().split(",");
                             for (String tag : tags) {
+                                tag = tag.trim();
                                 Etiqueta etiqueta = repository.getData().buscaEtiquetaPorNome(tag);
                                 if (etiqueta == null) {
                                     etiqueta = new Etiqueta();
