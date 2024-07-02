@@ -8,8 +8,6 @@ import lombok.Data;
 
 @Data
 public abstract class Pagina {
-    public abstract boolean dadosValidos();
-
     public enum Estado {
         CREATE,
         READ,
@@ -32,6 +30,10 @@ public abstract class Pagina {
 
     public void adicionaMensagemDeErro(String campo, String mensagem) {
         this.mensagensDeErro.add(new MensagemDeErro(campo, mensagem));
+    }
+
+    public boolean dadosValidos() {
+        return true;
     }
 
     public boolean estaVazio(Collection<String> value) {

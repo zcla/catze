@@ -22,11 +22,12 @@ import zcla71.baudoze.service.model.Livro;
 import zcla71.baudoze.service.model.Obra;
 import zcla71.baudoze.service.model.Pessoa;
 import zcla71.baudoze.view.livro.LivroPagina;
+import zcla71.baudoze.view.livros.LivrosPagina;
+import zcla71.baudoze.view.livros.LivrosPaginaLivro;
 import zcla71.baudoze.view.model.Atividades;
 import zcla71.baudoze.view.model.Colecoes;
 import zcla71.baudoze.view.model.Editoras;
 import zcla71.baudoze.view.model.Etiquetas;
-import zcla71.baudoze.view.model.Livros;
 import zcla71.baudoze.view.model.Obras;
 import zcla71.baudoze.view.model.Pessoas;
 import zcla71.baudoze.view.model.Stats;
@@ -147,22 +148,22 @@ public class BauDoZe {
         }
     }
 
-    public Collection<Livros> getLivros() throws StreamReadException, DatabindException, IOException {
+    public LivrosPagina getLivros() throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
         Collection<Livro> livros = service.listaLivros();
-        List<Livros> result = new ArrayList<>();
+        LivrosPagina result = new LivrosPagina();
         for (Livro livro : livros) {
-            result.add(new Livros(livro));
+            result.add(new LivrosPaginaLivro(livro));
         }
 
-        // Atualmente desnecessário, pois o DataTable já ordena
-        Collections.sort(result, new Comparator<Livros>() {
-            @Override
-            public int compare(Livros o1, Livros o2) {
-                Collator ptBrCollator = Collator.getInstance(Locale.forLanguageTag("pt-BR"));
-                return ptBrCollator.compare(o1.getTitulo(), o2.getTitulo());
-            }
-        });
+        // // Atualmente desnecessário, pois o DataTable já ordena
+        // Collections.sort(result, new Comparator<LivrosPaginaLivro>() {
+        //     @Override
+        //     public int compare(LivrosPaginaLivro o1, LivrosPaginaLivro o2) {
+        //         Collator ptBrCollator = Collator.getInstance(Locale.forLanguageTag("pt-BR"));
+        //         return ptBrCollator.compare(o1.getTitulo(), o2.getTitulo());
+        //     }
+        // });
 
         return result;
     }

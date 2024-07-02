@@ -1,4 +1,4 @@
-package zcla71.baudoze.view.model;
+package zcla71.baudoze.view.livros;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -16,7 +16,7 @@ import zcla71.baudoze.service.model.Obra;
 import zcla71.baudoze.service.model.Pessoa;
 
 @Data
-public class Livros {
+public class LivrosPaginaLivro {
     private String id;
     private String titulo;
     private Integer qtdObras;
@@ -32,7 +32,7 @@ public class Livros {
     private String edicao;
     private String status;
 
-    public Livros(Livro livro) throws StreamReadException, DatabindException, IOException {
+    public LivrosPaginaLivro(Livro livro) throws StreamReadException, DatabindException, IOException {
         Service service = Service.getInstance();
 
         this.id = livro.getId();
