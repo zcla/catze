@@ -154,7 +154,60 @@ public class BauDoZe {
         Collection<Livro> livros = service.listaLivros();
         LivrosPagina result = new LivrosPagina();
         for (Livro livro : livros) {
-            result.add(new LivrosPaginaLivro(livro));
+            LivrosPaginaLivro lpLivro = new LivrosPaginaLivro();
+
+            lpLivro.setId(livro.getId());
+            lpLivro.setTitulo(livro.getTitulo());
+            lpLivro.setQtdObras(livro.getIdsObras().size());
+
+            lpLivro.setAutorPrincipal(null);
+            lpLivro.setQtdOutrosAutores(0);
+            for (String idObra : livro.getIdsObras()) {
+                Obra obra = service.buscaObraPorId(idObra);
+                for (String idPessoa : obra.getIdsAutores()) {
+                    Pessoa autor = service.buscaPessoaPorId(idPessoa);
+                    if (lpLivro.getAutorPrincipal() == null) {
+                        lpLivro.setAutorPrincipal(autor.getNome());
+                    } else {
+                        lpLivro.setQtdOutrosAutores(lpLivro.getQtdOutrosAutores() + 1);
+                    }
+                }
+            }
+
+            lpLivro.setIsbn(livro.getIsbn13() != null ? livro.getIsbn13() : livro.getIsbn10());
+
+            lpLivro.setEditoraPrincipal(null);
+            lpLivro.setQtdOutrasEditoras(0);
+            for (String idEditora : livro.getIdsEditoras()) {
+                Editora editora = service.buscaEditoraPorId(idEditora);
+                if (lpLivro.getEditoraPrincipal() == null) {
+                    lpLivro.setEditoraPrincipal(editora.getNome());
+                } else {
+                    lpLivro.setQtdOutrasEditoras(lpLivro.getQtdOutrasEditoras() + 1);
+                }
+            }
+
+            lpLivro.setAno(livro.getAno());
+
+            Colecao colecao = service.listaColecoes().stream().filter(c -> c.getIdsLivros().contains(livro.getId())).findFirst().orElse(null);
+            if (colecao != null) {
+                lpLivro.setColecao(colecao.getNome());
+            }
+
+            Collection<Etiqueta> etiquetas = service.listaEtiquetas().stream().filter(e -> livro.getIdsEtiquetas().contains(e.getId())).toList();
+            lpLivro.setEtiquetas("");
+            for (Etiqueta etiqueta : etiquetas) {
+                lpLivro.setEtiquetas(etiqueta.getNome() + ", ");
+            }
+            if (lpLivro.getEtiquetas().length() > 0) {
+                lpLivro.setEtiquetas(lpLivro.getEtiquetas().substring(0, lpLivro.getEtiquetas().length() - 2));
+            }
+
+            lpLivro.setPaginas(livro.getPaginas());
+            lpLivro.setEdicao(livro.getEdicao());
+            lpLivro.setStatus(service.buscaUltimaAtividadeDoLivro(livro.getId()).getTipo().getStatus());
+
+            result.add(lpLivro);
         }
 
         // // Atualmente desnecessário, pois o DataTable já ordena
